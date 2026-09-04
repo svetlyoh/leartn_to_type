@@ -1,0 +1,2 @@
+export async function api<T>(path:string,init:RequestInit={}){const headers=new Headers(init.headers);headers.set('Accept','application/json');if(init.body){headers.set('Content-Type','application/json');headers.set('X-Cadence-Request','1');}const response=await fetch(`/api/v1${path}`,{...init,headers,credentials:'same-origin'});if(!response.ok)throw new Error(`Request failed (${response.status})`);return response.json() as Promise<T>;}
+

@@ -1,0 +1,2 @@
+export type CoachMode='silent'|'calm'|'competitive';
+export function coachNote(mode:CoachMode,accuracy:number,wpm:number,best=0){if(mode==='silent')return '';if(mode==='competitive')return wpm>best?'New personal pace. Keep the same clean rhythm.':`Personal target: ${Math.max(1,Math.ceil(best))} WPM with steady accuracy.`;return accuracy>=95?'Rhythm is settling in. One more clean round will make it stick.':'Slow the reach slightly. Accuracy comes first; speed follows.';}

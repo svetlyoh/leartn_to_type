@@ -1,0 +1,1 @@
+{"private":true,"scripts":{"generate":"python scripts/generate_shared.py","test":"npm --prefix frontend test -- --run","typecheck":"npm --prefix frontend run typecheck","build":"npm --prefix frontend run build"},"devDependencies":{"wrangler":"^4.129.0"}}

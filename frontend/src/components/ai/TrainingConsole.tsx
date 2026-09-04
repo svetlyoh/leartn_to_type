@@ -1,0 +1,1 @@
+export function TrainingConsole({onReshuffle}:{onReshuffle:()=>void}){return <section className="console"><p className="eyebrow">Training console</p><button onClick={onReshuffle}>Reshuffle this lesson</button><button disabled title="Available with cloud training">Explain my mistakes</button><button disabled>Practice weak keys</button></section>}

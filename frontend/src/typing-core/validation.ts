@@ -1,0 +1,3 @@
+export type Validation={valid:boolean;errors:string[];text:string};
+export function validateGenerated(raw:string,allowed:string,min=12,max=240):Validation{let text=raw.trim();if(text.startsWith('```')&&text.endsWith('```'))text=text.replace(/^```(?:text)?\s*/,'').replace(/\s*```$/,'').trim();const errors:string[]=[];if(text.length<min)errors.push('too_short');if(text.length>max)errors.push('too_long');const set=new Set(allowed);if([...text].some(c=>!set.has(c)))errors.push('forbidden_character');if(/(.{2,})\1\1\1/.test(text))errors.push('repetitive');return{valid:errors.length===0,errors,text};}
+

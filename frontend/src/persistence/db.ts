@@ -1,0 +1,5 @@
+const DB='cadence-local',VERSION=1;
+export const openDb=()=>new Promise<IDBDatabase>((resolve,reject)=>{const r=indexedDB.open(DB,VERSION);r.onupgradeneeded=()=>{for(const n of ['activeSessions','syncQueue','generatedContent'])if(!r.result.objectStoreNames.contains(n))r.result.createObjectStore(n,{keyPath:'id'});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
+export async function put(store:string,value:object){const db=await openDb();await new Promise<void>((res,rej)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(value);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});db.close();}
+export async function get<T>(store:string,id:string){const db=await openDb();const v=await new Promise<T|undefined>((res,rej)=>{const r=db.transaction(store).objectStore(store).get(id);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});db.close();return v;}
+

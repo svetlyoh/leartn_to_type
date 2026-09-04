@@ -1,0 +1,1 @@
+import'fake-indexeddb/auto';import{describe,it,expect}from'vitest';import{loadActive,saveActive}from'./activeSessionStore';describe('active persistence',()=>{it('round trips versioned state',async()=>{await saveActive({id:'p1',saveVersion:1,prompt:'asdf',position:2,updatedAt:'2026-09-04T00:00:00Z'});expect((await loadActive('p1'))?.position).toBe(2)})});

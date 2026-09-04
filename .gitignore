@@ -1,0 +1,12 @@
+node_modules/
+frontend/dist/
+.dev.vars
+.venv/
+.uv-cache/
+.uv-python/
+.venv-workers/
+python_modules/
+__pycache__/
+.pytest_cache/
+playwright-report/
+test-results/

@@ -1,0 +1,4 @@
+MINIMAX_API_KEY=replace-with-local-development-key
+PIN_PEPPER=replace-with-long-random-local-value
+SESSION_PEPPER=replace-with-different-long-random-local-value
+BOOTSTRAP_TOKEN=replace-with-one-time-local-token
