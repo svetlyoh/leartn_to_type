@@ -1,0 +1,1 @@
+export function SessionControls({onSave,onExit,onClose,status}:{onSave:()=>void;onExit:()=>void;onClose:()=>void;status:string}){return <div className="session-controls"><button onClick={onSave}>Save session</button><button onClick={onExit}>Exit to menu</button><button onClick={onClose}>Close app</button>{status&&<span role="status">{status}</span>}</div>}

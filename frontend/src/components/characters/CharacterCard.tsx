@@ -1,0 +1,3 @@
+import{CHARACTERS}from'./characterCatalog';
+export type ProfileCard={id:string;display_name:string;pin_required:boolean;is_test_profile:boolean;character_id:string};
+export function CharacterCard({profile,onSelect}:{profile:ProfileCard;onSelect:(p:ProfileCard)=>void}){const character=CHARACTERS.find(c=>c.id===profile.character_id)??CHARACTERS[0];return <button className="character-card" onClick={()=>onSelect(profile)}><img src={character.image} alt=""/><span className="character-meta"><strong>{profile.display_name}</strong><small>{character.name} · {character.trait}</small></span>{profile.pin_required&&<span className="lock">PIN</span>}</button>}
