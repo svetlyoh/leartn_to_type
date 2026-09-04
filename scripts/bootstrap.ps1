@@ -25,7 +25,13 @@ if ($sitePin -eq $adminPin) {
 }
 
 $tokenBytes = New-Object byte[] 48
-[Security.Cryptography.RandomNumberGenerator]::Fill($tokenBytes)
+$random = [Security.Cryptography.RandomNumberGenerator]::Create()
+try {
+    $random.GetBytes($tokenBytes)
+}
+finally {
+    $random.Dispose()
+}
 $bootstrapToken = [Convert]::ToBase64String($tokenBytes)
 
 try {
