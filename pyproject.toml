@@ -2,7 +2,7 @@
 name = "learn-to-type"
 version = "0.1.0"
 requires-python = ">=3.13"
-dependencies = ["fastapi>=0.116", "httpx>=0.28"]
+dependencies = ["fastapi>=0.116", "httpx>=0.28", "webauthn>=2.7"]
 [dependency-groups]
 dev = ["workers-py", "workers-runtime-sdk", "pytest>=8", "pytest-asyncio>=1"]
 [tool.pytest.ini_options]

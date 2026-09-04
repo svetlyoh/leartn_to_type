@@ -1,0 +1,7 @@
+import { useState } from 'react';
+import { api } from '../api/client';
+export function AccessPinScreen({ changed, onUnlocked, onExit }: { changed: boolean; onUnlocked: () => void; onExit: () => void }) {
+  const [pin, setPin] = useState(''); const [error, setError] = useState(''); const [busy, setBusy] = useState(false);
+  const submit = async (event: React.FormEvent) => { event.preventDefault(); setBusy(true); setError(''); try { await api('/auth/activate', { method: 'POST', body: JSON.stringify({ pin }) }); onUnlocked(); } catch { setError('That PIN did not unlock Cadence. Check it and try again.'); } finally { setBusy(false); } };
+  return <main className="form-screen"><form onSubmit={submit}><p className="eyebrow">CADENCE</p><h1>{changed ? 'New access PIN required' : 'Access locked'}</h1><p>{changed ? 'Your passkey still works and your progress is safe. Enter the current Cadence PIN to continue.' : 'Your passkey is ready. Enter the Cadence access PIN to continue.'}</p><label>Cadence access PIN<input autoFocus inputMode="numeric" autoComplete="one-time-code" type="password" minLength={6} maxLength={12} value={pin} onChange={event => setPin(event.target.value.replace(/\D/g, ''))} /></label><button disabled={busy || pin.length < 6}>{busy ? 'Unlocking…' : 'Unlock'}</button>{error && <p className="warning" role="alert">{error}</p>}<small>Don’t have the PIN yet? Your passkey and account are saved.</small><button className="quiet" type="button" onClick={onExit}>Exit</button></form></main>;
+}

@@ -3,12 +3,14 @@ import hmac
 import hashlib
 import json
 import uuid
+import os
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 from app.auth.lockout import failure_state
 from app.auth.input import parse_urlencoded_pin
 from app.auth.pin_kdf import create_verifier, valid_pin, verify
 from app.auth.sessions import COOKIE, cookie_header, new_token, token_hash
+from app.auth.passkeys import authentication_options, b64url, registration_options, verify_authentication, verify_registration
 from app.ai.fallback import choose_fallback
 from app.ai.minimax_provider import MiniMaxProvider
 from app.ai.validator import validate
@@ -18,8 +20,18 @@ from app.security_headers import SECURITY_HEADERS
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 GENERIC = "Access unavailable. Check the PIN or try again later."
-SAFE_MUTATION_EXEMPTIONS = {"/api/v1/auth/site-login", "/api/v1/admin/bootstrap"}
-GATE = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Cadence access</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1017;color:#e8edf2;font:16px system-ui}.gate{width:min(360px,90vw);padding:2.5rem;background:#131b25;border:1px solid #263343;border-radius:14px}small{color:#75d6bd;text-transform:uppercase;letter-spacing:.15em}input,button{width:100%;box-sizing:border-box;margin-top:1rem;padding:.85rem;border-radius:8px;border:1px solid #34465a;background:#0d141c;color:white}button{background:#75d6bd;color:#07120f;font-weight:bold}</style></head><body><form class="gate" method="post" action="/api/v1/auth/site-login"><small>Cadence</small><h1>Private training access</h1><label>Enter access PIN<input name="pin" type="password" inputmode="numeric" minlength="6" maxlength="12" required autofocus></label><button>Enter training</button></form></body></html>"""
+SAFE_MUTATION_EXEMPTIONS = {"/api/v1/auth/site-login", "/api/v1/admin/bootstrap", "/api/v1/auth/passkey/register/options", "/api/v1/auth/passkey/register/verify", "/api/v1/auth/passkey/login/options", "/api/v1/auth/passkey/login/verify"}
+CEREMONY_COOKIE = "__Host-cadence_ceremony"
+GATE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Cadence</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#070a0e;color:#edf4f2;font:16px system-ui}.gate{width:min(420px,88vw);padding:3rem;background:#10171f;border:1px solid #283745;border-radius:16px;text-align:center}small{color:#75d6bd;text-transform:uppercase;letter-spacing:.18em}h1{font-size:3rem;letter-spacing:.08em;margin:.35rem 0}p{color:#aebbc4}button{width:100%;margin-top:.8rem;padding:.9rem;border-radius:8px;border:1px solid #75d6bd;background:#75d6bd;color:#07120f;font-weight:750}button.secondary{background:transparent;color:#edf4f2;border-color:#405464}#status{min-height:1.5em;color:#f0c979}</style></head><body><section class="gate"><small>Private performance lab</small><h1>CADENCE</h1><p>Learn to type. Build your rhythm.</p><button id="signin">Sign in with passkey</button><button id="create" class="secondary">Create account</button><p id="status" role="status"></p></section><script>
+const status=document.querySelector('#status');
+const decode=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/').padEnd(Math.ceil(s.length/4)*4,'=')),c=>c.charCodeAt(0));
+const encode=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const prep=o=>{o.challenge=decode(o.challenge);if(o.user)o.user.id=decode(o.user.id);if(o.excludeCredentials)o.excludeCredentials=o.excludeCredentials.map(x=>({...x,id:decode(x.id)}));if(o.allowCredentials)o.allowCredentials=o.allowCredentials.map(x=>({...x,id:decode(x.id)}));return o};
+const pack=c=>({id:c.id,rawId:encode(c.rawId),type:c.type,authenticatorAttachment:c.authenticatorAttachment,response:{clientDataJSON:encode(c.response.clientDataJSON),...(c.response.attestationObject?{attestationObject:encode(c.response.attestationObject),transports:c.response.getTransports?.()||[]}:{authenticatorData:encode(c.response.authenticatorData),signature:encode(c.response.signature),userHandle:c.response.userHandle?encode(c.response.userHandle):null})},clientExtensionResults:c.getClientExtensionResults()});
+async function run(kind){try{status.textContent='Waiting for your passkey…';const options=await fetch(`/api/v1/auth/passkey/${kind}/options`,{method:'POST'}).then(check);const credential=kind==='register'?await navigator.credentials.create({publicKey:prep(options.publicKey)}):await navigator.credentials.get({publicKey:prep(options.publicKey)});await fetch(`/api/v1/auth/passkey/${kind}/verify`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({credential:pack(credential)})}).then(check);location.assign('/app/')}catch(e){status.textContent=e.name==='NotAllowedError'?'Passkey request was canceled. Try again when ready.':'Passkey sign-in was unavailable. Please try again.'}}
+async function check(r){if(!r.ok)throw new Error(String(r.status));return r.json()}
+document.querySelector('#signin').onclick=()=>run('login');document.querySelector('#create').onclick=()=>run('register');
+</script></body></html>"""
 
 def now(): return datetime.now(timezone.utc)
 def iso(value): return value.isoformat().replace("+00:00", "Z")
@@ -51,10 +63,74 @@ async def harden(request, call_next):
     return response
 
 @app.get("/", response_class=HTMLResponse)
-async def gate(): return HTMLResponse(GATE)
+async def gate(request: Request):
+    return RedirectResponse("/app/", 303) if await current_session(request) else HTMLResponse(GATE)
 
 @app.get("/healthz")
 async def health(): return {"ok": True}
+
+def relying_party(request):
+    host = request.url.hostname or "localhost"
+    origin = f"{request.url.scheme}://{request.url.netloc}"
+    return host, origin
+
+def ceremony_cookie(value):
+    return f"{CEREMONY_COOKIE}={value}; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age=300"
+
+async def store_challenge(binding, ceremony_type, challenge, pending_user_id=None, webauthn_user_id=None, temporary_handle=None):
+    challenge_id = f"chal_{uuid.uuid4().hex}"; nonce = new_token(); timestamp = now()
+    await execute(binding.DB, "DELETE FROM webauthn_challenges WHERE expires_at<=?", iso(timestamp))
+    await execute(binding.DB, "INSERT INTO webauthn_challenges(id,session_nonce,challenge,ceremony_type,pending_user_id,webauthn_user_id,temporary_handle,expires_at,created_at) VALUES(?,?,?,?,?,?,?,?,?)", challenge_id, token_hash(nonce, required_secret(binding, "SESSION_PEPPER")), challenge, ceremony_type, pending_user_id, webauthn_user_id, temporary_handle, iso(timestamp + timedelta(minutes=5)), iso(timestamp))
+    return challenge_id, nonce
+
+async def consume_challenge(request, ceremony_type):
+    nonce = request.cookies.get(CEREMONY_COOKIE)
+    if not nonce: raise HTTPException(400, "Passkey ceremony expired")
+    binding = env(request); row = await first(binding.DB, "SELECT * FROM webauthn_challenges WHERE session_nonce=? AND ceremony_type=? AND expires_at>?", token_hash(nonce, required_secret(binding, "SESSION_PEPPER")), ceremony_type, iso(now()))
+    if not row: raise HTTPException(400, "Passkey ceremony expired")
+    await execute(binding.DB, "DELETE FROM webauthn_challenges WHERE id=?", row["id"])
+    return row
+
+async def begin_user_session(request, user_id):
+    binding = env(request); timestamp = now(); raw = new_token(); ttl = min(172800, int(str(getattr(binding, "SESSION_TTL_SECONDS", "172800"))))
+    await execute(binding.DB, "INSERT INTO auth_sessions(session_hash,role,profile_id,created_at,last_seen_at,expires_at,user_id) VALUES(?,'learner',NULL,?,?,?,?)", token_hash(raw, required_secret(binding, "SESSION_PEPPER")), iso(timestamp), iso(timestamp), iso(timestamp + timedelta(seconds=ttl)), user_id)
+    return raw
+
+@app.post("/api/v1/auth/passkey/register/options")
+async def passkey_register_options(request: Request):
+    binding = env(request); user_id = f"usr_{uuid.uuid4().hex}"; handle = f"cadence-{uuid.uuid4().hex[:12]}"; user_handle = os.urandom(32); challenge = os.urandom(32); rp_id, _ = relying_party(request)
+    _, nonce = await store_challenge(binding, "registration", challenge, user_id, user_handle, handle)
+    response = JSONResponse({"publicKey": registration_options(rp_id, handle, user_handle, challenge)})
+    response.headers["Set-Cookie"] = ceremony_cookie(nonce); return response
+
+@app.post("/api/v1/auth/passkey/register/verify")
+async def passkey_register_verify(request: Request):
+    binding = env(request); body = await request.json(); challenge_row = await consume_challenge(request, "registration"); rp_id, origin = relying_party(request)
+    try: verified = verify_registration(body.get("credential", {}), bytes(challenge_row["challenge"]), rp_id, origin)
+    except Exception: raise HTTPException(400, "Passkey registration could not be verified")
+    timestamp = iso(now()); credential_id = b64url(verified.credential_id)
+    statements = [
+        binding.DB.prepare("INSERT INTO users(id,webauthn_user_id,temporary_handle,account_status,created_at,updated_at) VALUES(?,?,?,'active',?,?)").bind(challenge_row["pending_user_id"], challenge_row["webauthn_user_id"], challenge_row["temporary_handle"], timestamp, timestamp),
+        binding.DB.prepare("INSERT INTO passkey_credentials(credential_id,user_id,public_key,sign_count,device_type,backed_up,transports_json,created_at,last_used_at) VALUES(?,?,?,?,?,?,?,?,?)").bind(credential_id, challenge_row["pending_user_id"], verified.credential_public_key, verified.sign_count, str(verified.credential_device_type.value), 1 if verified.credential_backed_up else 0, json.dumps(body.get("credential",{}).get("response",{}).get("transports",[])), timestamp, timestamp),
+        binding.DB.prepare("UPDATE profiles SET user_id=? WHERE user_id IS NULL").bind(challenge_row["pending_user_id"]),
+    ]
+    await binding.DB.batch(statements); raw = await begin_user_session(request, challenge_row["pending_user_id"])
+    response = JSONResponse({"ok":True,"next":"/app/"}); response.headers.append("Set-Cookie", cookie_header(raw)); response.headers.append("Set-Cookie", f"{CEREMONY_COOKIE}=; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age=0"); return response
+
+@app.post("/api/v1/auth/passkey/login/options")
+async def passkey_login_options(request: Request):
+    binding = env(request); challenge = os.urandom(32); rp_id, _ = relying_party(request); _, nonce = await store_challenge(binding, "authentication", challenge)
+    response = JSONResponse({"publicKey": authentication_options(rp_id, challenge)}); response.headers["Set-Cookie"] = ceremony_cookie(nonce); return response
+
+@app.post("/api/v1/auth/passkey/login/verify")
+async def passkey_login_verify(request: Request):
+    binding = env(request); body = await request.json(); supplied = body.get("credential", {}); credential_id = str(supplied.get("id", "")); row = await first(binding.DB, "SELECT p.*,u.account_status FROM passkey_credentials p JOIN users u ON u.id=p.user_id WHERE p.credential_id=?", credential_id); challenge_row = await consume_challenge(request, "authentication")
+    if not row or row.get("account_status") != "active": raise HTTPException(401, "Passkey sign-in unavailable")
+    rp_id, origin = relying_party(request)
+    try: verified = verify_authentication(supplied, bytes(challenge_row["challenge"]), rp_id, origin, bytes(row["public_key"]), int(row["sign_count"]))
+    except Exception: raise HTTPException(401, "Passkey sign-in unavailable")
+    timestamp = iso(now()); await execute(binding.DB, "UPDATE passkey_credentials SET sign_count=?,device_type=?,backed_up=?,last_used_at=? WHERE credential_id=?", verified.new_sign_count, str(verified.credential_device_type.value), 1 if verified.credential_backed_up else 0, timestamp, credential_id)
+    raw = await begin_user_session(request, row["user_id"]); response = JSONResponse({"ok":True,"next":"/app/"}); response.headers.append("Set-Cookie", cookie_header(raw)); response.headers.append("Set-Cookie", f"{CEREMONY_COOKIE}=; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age=0"); return response
 
 @app.get("/api/v1/auth/bootstrap-status")
 async def bootstrap_status(request: Request):
@@ -115,7 +191,7 @@ async def site_login(request: Request):
 async def current_session(request):
     raw = request.cookies.get(COOKIE)
     if not raw: return None
-    binding = env(request); row = await first(binding.DB, "SELECT role,profile_id,expires_at,revoked_at FROM auth_sessions WHERE session_hash=?", token_hash(raw, required_secret(binding, "SESSION_PEPPER")))
+    binding = env(request); row = await first(binding.DB, "SELECT role,profile_id,user_id,expires_at,revoked_at FROM auth_sessions WHERE session_hash=?", token_hash(raw, required_secret(binding, "SESSION_PEPPER")))
     if not row or row.get("revoked_at") or datetime.fromisoformat(row["expires_at"].replace("Z", "+00:00")) <= now(): return None
     return row
 
@@ -130,15 +206,37 @@ async def rotate_session(request, role, profile_id=None):
 async def require_session(request, *roles):
     session = await current_session(request)
     if not session or session["role"] not in roles: raise HTTPException(403, "Access unavailable")
+    if session["role"] == "learner" and session.get("user_id"):
+        access = await first(env(request).DB, "SELECT u.account_status,u.accepted_activation_version,c.activation_version FROM users u CROSS JOIN app_access_config c WHERE u.id=? AND c.id=1", session["user_id"])
+        if not access or access["account_status"] != "active" or access.get("accepted_activation_version") != access.get("activation_version"):
+            raise HTTPException(403, "Current Cadence access PIN required")
+        if not session.get("profile_id"):
+            profile = await first(env(request).DB, "SELECT id FROM profiles WHERE user_id=? AND deleted_at IS NULL ORDER BY created_at LIMIT 1", session["user_id"])
+            session["profile_id"] = profile.get("id") if profile else None
     return session
 
 @app.get("/api/v1/auth/session")
 async def auth_session(request: Request):
     session = await current_session(request)
-    profile = None
-    if session and session.get("profile_id"):
+    profile = None; activated = False; activation_changed = False
+    if session and session.get("user_id"):
+        access = await first(env(request).DB, "SELECT u.accepted_activation_version,c.activation_version FROM users u CROSS JOIN app_access_config c WHERE u.id=? AND c.id=1", session["user_id"])
+        activated = bool(access and access.get("accepted_activation_version") == access.get("activation_version")); activation_changed = bool(access and access.get("accepted_activation_version") is not None and not activated)
+        profile = await first(env(request).DB, "SELECT id,display_name,character_id FROM profiles WHERE user_id=? AND deleted_at IS NULL ORDER BY created_at LIMIT 1", session["user_id"])
+    elif session and session.get("profile_id"):
         profile = await first(env(request).DB, "SELECT id,display_name,character_id FROM profiles WHERE id=? AND deleted_at IS NULL", session["profile_id"])
-    return {"authenticated": bool(session), "role": session["role"] if session else None, "profile": profile}
+    return {"authenticated": bool(session and session.get("user_id")), "role": session["role"] if session and session.get("user_id") else None, "activated": activated, "activation_changed": activation_changed, "profile": profile}
+
+@app.post("/api/v1/auth/activate")
+async def activate(request: Request):
+    session = await current_session(request)
+    if not session or not session.get("user_id"): raise HTTPException(401, "Passkey sign-in required")
+    binding = env(request); pin = await read_pin(request); credential = await first(binding.DB, "SELECT * FROM pin_credentials WHERE subject_type='site' AND subject_id='site'")
+    if credential and credential_locked(credential): raise HTTPException(429, GENERIC)
+    if not await verify_credential(binding, credential, pin): raise HTTPException(401, GENERIC)
+    access = await first(binding.DB, "SELECT activation_version FROM app_access_config WHERE id=1"); timestamp = iso(now())
+    await execute(binding.DB, "UPDATE users SET accepted_activation_version=?,activation_verified_at=?,updated_at=? WHERE id=?", int(access["activation_version"]), timestamp, timestamp, session["user_id"])
+    return {"ok":True,"next":"/app/"}
 
 @app.post("/api/v1/auth/admin-login")
 async def admin_login(request: Request):
@@ -148,35 +246,20 @@ async def admin_login(request: Request):
     if not await verify_credential(binding, credential, pin): raise HTTPException(401, GENERIC)
     raw = await rotate_session(request, "admin"); response = JSONResponse({"ok": True}); response.headers["Set-Cookie"] = cookie_header(raw); return response
 
-@app.post("/api/v1/auth/profile-login")
-async def profile_login(request: Request):
-    await require_session(request, "site", "admin"); binding = env(request); body = await request.json(); profile_id = str(body.get("profile_id", "")); pin = str(body.get("pin", ""))
-    profile = await first(binding.DB, "SELECT id,pin_required FROM profiles WHERE id=? AND deleted_at IS NULL", profile_id)
-    if not profile: raise HTTPException(401, GENERIC)
-    if int(profile["pin_required"]):
-        credential = await first(binding.DB, "SELECT * FROM pin_credentials WHERE subject_type='profile' AND subject_id=?", profile_id)
-        if credential and credential_locked(credential): raise HTTPException(429, GENERIC)
-        if not await verify_credential(binding, credential, pin): raise HTTPException(401, GENERIC)
-    raw = await rotate_session(request, "learner", profile_id); response = JSONResponse({"ok": True}); response.headers["Set-Cookie"] = cookie_header(raw); return response
-
-@app.post("/api/v1/auth/profile-exit")
-async def profile_exit(request: Request):
-    await require_session(request, "learner"); raw = await rotate_session(request, "site"); response = JSONResponse({"ok": True}); response.headers["Set-Cookie"] = cookie_header(raw); return response
-
 @app.get("/api/v1/profiles")
 async def list_profiles(request: Request):
-    await require_session(request, "site", "admin"); result = await env(request).DB.prepare("SELECT id,display_name,pin_required,is_test_profile,character_id FROM profiles WHERE deleted_at IS NULL ORDER BY created_at").all(); data = as_dict(result)
+    session = await require_session(request, "learner"); result = await env(request).DB.prepare("SELECT id,display_name,0 pin_required,is_test_profile,character_id FROM profiles WHERE user_id=? AND deleted_at IS NULL ORDER BY created_at").bind(session["user_id"]).all(); data = as_dict(result)
     return data.get("results", []) if isinstance(data, dict) else []
 
 @app.post("/api/v1/profiles")
 async def create_profile(request: Request):
-    await require_session(request, "admin"); binding = env(request); body = await request.json(); name = str(body.get("display_name", "")).strip(); pin = str(body.get("pin", "")).strip(); character = str(body.get("character_id", "runner_01")); allowed = {"runner_01","runner_02","focus_01","focus_02"}
-    if not 1 <= len(name) <= 40 or character not in allowed or (pin and not valid_pin(pin, "profile")): raise HTTPException(422, "Profile data is invalid")
-    profile_id = f"prof_{uuid.uuid4().hex}"; timestamp = iso(now()); pin_required = 1 if pin else 0
-    statements = [binding.DB.prepare("INSERT INTO profiles(id,display_name,pin_required,save_version,curriculum_version,character_id,created_at,updated_at) VALUES(?,?,?,1,?,?,?,?)").bind(profile_id,name,pin_required,str(binding.CURRICULUM_VERSION),character,timestamp,timestamp), binding.DB.prepare("INSERT INTO progress(profile_id,save_version,curriculum_version,stage_id,unlocked_keys_json,current_lesson_id,resume_json,revision,updated_at) VALUES(?,1,?,'orientation','[\"f\",\"j\",\" \"]','orientation-1','{}',1,?)").bind(profile_id,str(binding.CURRICULUM_VERSION),timestamp)]
-    if pin:
-        salt, digest, iterations = create_verifier(pin, required_secret(binding, "PIN_PEPPER")); statements.append(binding.DB.prepare("INSERT INTO pin_credentials(id,subject_type,subject_id,salt_b64,verifier_b64,kdf_iterations,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)").bind(f"pin_{uuid.uuid4().hex}","profile",profile_id,salt,digest,iterations,timestamp,timestamp))
-    await binding.DB.batch(statements); return {"id": profile_id, "display_name": name, "pin_required": bool(pin), "character_id": character}
+    session = await require_session(request, "learner"); binding = env(request); body = await request.json(); name = str(body.get("display_name", "")).strip(); character = str(body.get("character_id", "runner_01")); allowed = {"runner_01","runner_02","focus_01","focus_02"}
+    if not 1 <= len(name) <= 40 or character not in allowed: raise HTTPException(422, "Profile data is invalid")
+    existing = await first(binding.DB, "SELECT id FROM profiles WHERE user_id=? AND deleted_at IS NULL", session["user_id"])
+    if existing: raise HTTPException(409, "This account already has a player")
+    profile_id = f"prof_{uuid.uuid4().hex}"; timestamp = iso(now())
+    statements = [binding.DB.prepare("INSERT INTO profiles(id,display_name,pin_required,save_version,curriculum_version,character_id,user_id,created_at,updated_at) VALUES(?,?,0,1,?,?,?,?,?)").bind(profile_id,name,str(binding.CURRICULUM_VERSION),character,session["user_id"],timestamp,timestamp), binding.DB.prepare("INSERT INTO progress(profile_id,save_version,curriculum_version,stage_id,unlocked_keys_json,current_lesson_id,resume_json,revision,updated_at) VALUES(?,1,?,'orientation','[\"f\",\"j\",\" \"]','orientation-1','{}',1,?)").bind(profile_id,str(binding.CURRICULUM_VERSION),timestamp), binding.DB.prepare("UPDATE users SET onboarding_completed=1,updated_at=? WHERE id=?").bind(timestamp,session["user_id"])]
+    await binding.DB.batch(statements); return {"id": profile_id, "display_name": name, "pin_required": False, "character_id": character}
 
 @app.patch("/api/v1/profile/character")
 async def update_character(request: Request):
