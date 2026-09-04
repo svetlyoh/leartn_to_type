@@ -41,6 +41,8 @@ try {
     $headers = @{ Authorization = "Bearer $bootstrapToken" }
     $body = @{ site_pin = $sitePin; admin_pin = $adminPin } | ConvertTo-Json -Compress
     $result = $null
+    Write-Host 'Waiting for the temporary Worker secret to propagate...'
+    Start-Sleep -Seconds 12
     for ($attempt = 1; $attempt -le 4; $attempt++) {
         try {
             $result = Invoke-RestMethod -Method Post -Uri 'https://leartn-to-type.svetlyoh.workers.dev/api/v1/admin/bootstrap' -Headers $headers -ContentType 'application/json' -Body $body
@@ -48,7 +50,7 @@ try {
         }
         catch {
             $status = [int]$_.Exception.Response.StatusCode
-            if ($status -ne 401 -or $attempt -eq 4) { throw }
+            if ($status -notin @(401, 503) -or $attempt -eq 4) { throw }
             Write-Host 'Waiting for the temporary Worker secret to propagate...'
             Start-Sleep -Seconds 8
         }
