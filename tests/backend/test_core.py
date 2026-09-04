@@ -1,5 +1,6 @@
 from datetime import datetime,timezone
 from backend.app.auth.lockout import failure_state
+from backend.app.auth.input import parse_urlencoded_pin
 from backend.app.auth.pin_kdf import create_verifier,verify,valid_pin
 from backend.app.auth.sessions import new_token,token_hash,cookie_header
 from backend.app.ai.validator import validate
@@ -21,3 +22,6 @@ def test_ai_validation_and_fallback():
     assert validate('asdf asdf asdf','asdf ',5)['valid']
     assert 'forbidden_character' in validate('asdf q asdf','asdf ',5)['errors']
     assert choose_fallback(['a','b'],'00000001')=='b'
+def test_urlencoded_pin_input():
+    assert parse_urlencoded_pin(b'pin=123456') == '123456'
+    assert parse_urlencoded_pin(b'other=value') == ''

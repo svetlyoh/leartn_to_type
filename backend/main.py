@@ -4,6 +4,7 @@ import uuid
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 from app.auth.lockout import failure_state
+from app.auth.input import parse_urlencoded_pin
 from app.auth.pin_kdf import create_verifier, valid_pin, verify
 from app.auth.sessions import COOKIE, cookie_header, new_token, token_hash
 from app.security_headers import SECURITY_HEADERS
@@ -25,7 +26,7 @@ async def execute(db, sql, *values): return await db.prepare(sql).bind(*values).
 async def read_pin(request):
     if "application/json" in request.headers.get("content-type", ""):
         return str((await request.json()).get("pin", "")).strip()
-    return str((await request.form()).get("pin", "")).strip()
+    return parse_urlencoded_pin(await request.body())
 
 @app.middleware("http")
 async def harden(request, call_next):
