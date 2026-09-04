@@ -10,3 +10,5 @@ Deployment is deliberately blocked until the account resources are known.
 6. Configure `MINIMAX_API_KEY`, `PIN_PEPPER`, `SESSION_PEPPER`, and temporary `BOOTSTRAP_TOKEN` as Worker secrets.
 7. Deploy with `uv run pywrangler deploy`, attach the intended existing domain, bootstrap once, then delete `BOOTSTRAP_TOKEN`.
 8. Run the smoke tests in section 32.8 of the build specification.
+
+Cloudflare Git builds invoke the Wrangler `build.command`, which runs `npm run build:cloudflare`. That command installs the locked frontend dependencies and creates `frontend/dist` before Wrangler scans static assets.
