@@ -32,6 +32,17 @@ async function run(kind){try{status.textContent='Waiting for your passkey…';co
 async function check(r){if(!r.ok)throw new Error(String(r.status));return r.json()}
 document.querySelector('#signin').onclick=()=>run('login');document.querySelector('#create').onclick=()=>run('register');
 </script></body></html>"""
+AUTH_JS = r"""const status=document.querySelector('#status');
+const decode=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/').padEnd(Math.ceil(s.length/4)*4,'=')),c=>c.charCodeAt(0));
+const encode=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const prep=o=>{o.challenge=decode(o.challenge);if(o.user)o.user.id=decode(o.user.id);if(o.excludeCredentials)o.excludeCredentials=o.excludeCredentials.map(x=>({...x,id:decode(x.id)}));if(o.allowCredentials)o.allowCredentials=o.allowCredentials.map(x=>({...x,id:decode(x.id)}));return o};
+const pack=c=>({id:c.id,rawId:encode(c.rawId),type:c.type,authenticatorAttachment:c.authenticatorAttachment,response:{clientDataJSON:encode(c.response.clientDataJSON),...(c.response.attestationObject?{attestationObject:encode(c.response.attestationObject),transports:c.response.getTransports?.()||[]}:{authenticatorData:encode(c.response.authenticatorData),signature:encode(c.response.signature),userHandle:c.response.userHandle?encode(c.response.userHandle):null})},clientExtensionResults:c.getClientExtensionResults()});
+async function check(r){if(!r.ok)throw new Error(String(r.status));return r.json()}
+async function run(kind){try{if(!window.PublicKeyCredential)throw new Error('unsupported');status.textContent='Waiting for your passkey…';const options=await fetch(`/api/v1/auth/passkey/${kind}/options`,{method:'POST'}).then(check);const credential=kind==='register'?await navigator.credentials.create({publicKey:prep(options.publicKey)}):await navigator.credentials.get({publicKey:prep(options.publicKey)});await fetch(`/api/v1/auth/passkey/${kind}/verify`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({credential:pack(credential)})}).then(check);location.assign('/app/')}catch(e){status.textContent=e.name==='NotAllowedError'?'Passkey request was canceled. Try again when ready.':e.message==='unsupported'?'Passkeys are not supported in this browser.':'Passkey sign-in was unavailable. Please try again.'}}
+document.querySelector('#signin').addEventListener('click',()=>run('login'));document.querySelector('#create').addEventListener('click',()=>run('register'));"""
+# The production CSP intentionally rejects inline JavaScript. Keep the login logic
+# in a same-origin resource while retaining the small server-rendered gate.
+GATE = GATE[:GATE.index("<script>")] + '<script src="/auth.js" defer></script></body></html>'
 
 def now(): return datetime.now(timezone.utc)
 def iso(value): return value.isoformat().replace("+00:00", "Z")
@@ -69,6 +80,10 @@ async def gate(request: Request):
 
 @app.get("/healthz")
 async def health(): return {"ok": True}
+
+@app.get("/auth.js")
+async def auth_script():
+    return Response(AUTH_JS, media_type="text/javascript", headers={"Cache-Control":"public, max-age=300"})
 
 def relying_party(request):
     host = request.url.hostname or "localhost"

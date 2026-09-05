@@ -25,3 +25,7 @@ def test_ai_validation_and_fallback():
 def test_urlencoded_pin_input():
     assert parse_urlencoded_pin(b'pin=123456') == '123456'
     assert parse_urlencoded_pin(b'other=value') == ''
+def test_login_page_uses_csp_compatible_external_script():
+    source = open('backend/main.py', encoding='utf-8').read()
+    assert '<script src="/auth.js" defer></script>' in source
+    assert '@app.get("/auth.js")' in source
