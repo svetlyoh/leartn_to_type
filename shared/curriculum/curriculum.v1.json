@@ -1,39 +1,2206 @@
 {
-  "version": "2026.1",
+  "version": "2026.10",
   "stages": [
-    {"id":"orientation","order":1,"title":"Orientation","objective":"Find the home-row anchors.","introducedKeys":["f","j"],"allowedCharacters":"fj ","minimumCompletedDrills":2,"targetAccuracy":0.90,"targetMastery":0.60,"maxHintRate":0.20,"lessonIds":["orientation-1"],"fallbackDrills":["fj jf fj jf","ff jj fj jf"]},
-    {"id":"home_anchors","order":2,"title":"Anchor Keys","objective":"Build an even F/J rhythm.","introducedKeys":["f","j"," "],"allowedCharacters":"fj ","minimumCompletedDrills":4,"targetAccuracy":0.92,"targetMastery":0.75,"maxHintRate":0.15,"lessonIds":["home-anchors-1"],"fallbackDrills":["fj jf ff jj fj jf","jf fj jf fj ff jj"]},
-    {"id":"home_left","order":3,"title":"Left Home Row","objective":"Build relaxed left-hand control.","introducedKeys":["a","s","d"],"allowedCharacters":"asdfj ","minimumCompletedDrills":3,"targetAccuracy":0.92,"targetMastery":0.68,"maxHintRate":0.15,"lessonIds":["home-left-1"],"fallbackDrills":["asdf sad fad","dad adds a fad"]},
-    {"id":"home_right","order":4,"title":"Right Home Row","objective":"Add the right-hand home-row reaches.","introducedKeys":["k","l",";"],"allowedCharacters":"asdfjkl; ","minimumCompletedDrills":3,"targetAccuracy":0.92,"targetMastery":0.68,"maxHintRate":0.15,"lessonIds":["home-right-1"],"fallbackDrills":["jkl; jkl; fj fj","ask a lad; fall;"]},
-    {"id":"home_all","order":5,"title":"Full Home Row","objective":"Coordinate both hands on the home row.","introducedKeys":["g","h"],"allowedCharacters":"asdfghjkl; ","minimumCompletedDrills":4,"targetAccuracy":0.93,"targetMastery":0.70,"maxHintRate":0.14,"lessonIds":["home-all-1"],"fallbackDrills":["asdf ghjkl; asdf ghjkl;","a glad lad asks; a flash"]},
-    {"id":"top_left","order":6,"title":"Top Left","objective":"Reach upward with the left hand.","introducedKeys":["q","w","e","r","t"],"allowedCharacters":"qwertasdfghjkl; ","minimumCompletedDrills":4,"targetAccuracy":0.93,"targetMastery":0.70,"maxHintRate":0.14,"lessonIds":["top-left-1"],"fallbackDrills":["qwert wert fret tree","we start fresh; we get faster"]},
-    {"id":"top_right","order":7,"title":"Top Right","objective":"Reach upward with the right hand.","introducedKeys":["y","u","i","o","p"],"allowedCharacters":"qwertyuiopasdfghjkl; ","minimumCompletedDrills":4,"targetAccuracy":0.93,"targetMastery":0.70,"maxHintRate":0.14,"lessonIds":["top-right-1"],"fallbackDrills":["yuiop you pour oil","quiet type is useful"]},
-    {"id":"top_all","order":8,"title":"Full Top Row","objective":"Blend top and home rows smoothly.","introducedKeys":[],"allowedCharacters":"qwertyuiopasdfghjkl; ","minimumCompletedDrills":4,"targetAccuracy":0.94,"targetMastery":0.72,"maxHintRate":0.13,"lessonIds":["top-all-1"],"fallbackDrills":["type with a light steady flow","light falls; a steady flow"]},
-    {"id":"bottom_left","order":9,"title":"Bottom Left","objective":"Add lower-left reaches.","introducedKeys":["z","x","c","v","b"],"allowedCharacters":"qwertyuiopasdfghjkl;zxcvb ","minimumCompletedDrills":4,"targetAccuracy":0.94,"targetMastery":0.72,"maxHintRate":0.13,"lessonIds":["bottom-left-1"],"fallbackDrills":["zxcvb cave box vibe","a brave fox is quick"]},
-    {"id":"bottom_right","order":10,"title":"Bottom Right","objective":"Complete the lower row.","introducedKeys":["n","m",",",".","/"],"allowedCharacters":"qwertyuiopasdfghjkl;zxcvbnm,./ ","minimumCompletedDrills":4,"targetAccuracy":0.94,"targetMastery":0.72,"maxHintRate":0.13,"lessonIds":["bottom-right-1"],"fallbackDrills":["nm,./ moon, calm.","move in a calm rhythm."]},
-    {"id":"lowercase_letters","order":11,"title":"Lowercase Letters","objective":"Use every lowercase letter with control.","introducedKeys":[],"allowedCharacters":"abcdefghijklmnopqrstuvwxyz ,./;","minimumCompletedDrills":5,"targetAccuracy":0.95,"targetMastery":0.74,"maxHintRate":0.12,"lessonIds":["lowercase-1"],"fallbackDrills":["the quick brown fox jumps over the lazy dog","steady practice builds smooth typing rhythm"]},
-    {"id":"shift_capitals","order":12,"title":"Shift and Capitals","objective":"Coordinate Shift with either hand.","introducedKeys":["Shift"],"allowedCharacters":"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,./;","minimumCompletedDrills":5,"targetAccuracy":0.95,"targetMastery":0.74,"maxHintRate":0.12,"lessonIds":["capitals-1"],"fallbackDrills":["Calm Hands Build Better Rhythm","Focus First Then Add Speed"]},
-    {"id":"punctuation_basic","order":13,"title":"Basic Punctuation","objective":"Add punctuation without losing rhythm.","introducedKeys":[".",",","?","!","'","\"",":",";","-"],"allowedCharacters":"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .,/?!'\":;-","minimumCompletedDrills":5,"targetAccuracy":0.95,"targetMastery":0.75,"maxHintRate":0.11,"lessonIds":["punctuation-1"],"fallbackDrills":["Pause, breathe, and type with care.","Ready? Keep a calm, steady rhythm!"]},
-    {"id":"numbers","order":14,"title":"Numbers","objective":"Add the number row with accuracy.","introducedKeys":["0","1","2","3","4","5","6","7","8","9"],"allowedCharacters":"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,/?!'\":;-","minimumCompletedDrills":5,"targetAccuracy":0.95,"targetMastery":0.75,"maxHintRate":0.11,"lessonIds":["numbers-1"],"fallbackDrills":["Run 3 steady laps, then rest for 2 minutes.","Type 10 lines with 95 percent accuracy."]},
-    {"id":"short_sentences","order":15,"title":"Short Sentences","objective":"Practice clear everyday prose.","introducedKeys":[],"allowedCharacters":"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,/?!'\":;-","minimumCompletedDrills":5,"targetAccuracy":0.96,"targetMastery":0.76,"maxHintRate":0.10,"lessonIds":["sentences-1"],"fallbackDrills":["Good rhythm comes from relaxed, accurate movement.","Small improvements add up with each focused round."]},
-    {"id":"paragraphs","order":16,"title":"Paragraphs","objective":"Sustain readable long-form typing.","introducedKeys":[],"allowedCharacters":"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,/?!'\":;-","minimumCompletedDrills":5,"targetAccuracy":0.96,"targetMastery":0.78,"maxHintRate":0.10,"lessonIds":["paragraphs-1"],"fallbackDrills":["A steady pace is easier to sustain than a rushed start. Keep your hands relaxed, notice the next word, and let accuracy guide the rhythm of each sentence.","Longer practice works best when the goal stays simple. Breathe, keep a light touch, and continue at a pace that feels controlled from beginning to end."]}
+    {
+      "id": "module_01",
+      "order": 1,
+      "title": "Anchor Keys",
+      "phase": "foundation",
+      "objective": "F/J home anchors",
+      "focus": "F/J home anchors",
+      "introducedKeys": [
+        "f",
+        "j"
+      ],
+      "allowedCharacters": " fj",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_01"
+      ],
+      "builtInTextId": "builtin_01",
+      "fallbackDrills": [
+        "f j f j fj jf f j jf fj"
+      ]
+    },
+    {
+      "id": "module_02",
+      "order": 2,
+      "title": "Left Home",
+      "phase": "foundation",
+      "objective": "A S D F",
+      "focus": "A S D F",
+      "introducedKeys": [
+        "a",
+        "d",
+        "s"
+      ],
+      "allowedCharacters": " adfjs",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_02"
+      ],
+      "builtInTextId": "builtin_02",
+      "fallbackDrills": [
+        "asdf fdsa sad fad dad sass"
+      ]
+    },
+    {
+      "id": "module_03",
+      "order": 3,
+      "title": "Right Home",
+      "phase": "foundation",
+      "objective": "J K L ;",
+      "focus": "J K L ;",
+      "introducedKeys": [
+        "i",
+        "k",
+        "l"
+      ],
+      "allowedCharacters": " ;adfijkls",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_03"
+      ],
+      "builtInTextId": "builtin_03",
+      "fallbackDrills": [
+        "jkl; ;lkj jill silk ;lkj"
+      ]
+    },
+    {
+      "id": "module_04",
+      "order": 4,
+      "title": "Home Row Mix",
+      "phase": "foundation",
+      "objective": "Both home rows",
+      "focus": "Both home rows",
+      "introducedKeys": [],
+      "allowedCharacters": " ;adfijkls",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_04"
+      ],
+      "builtInTextId": "builtin_04",
+      "fallbackDrills": [
+        "ask a lad; fall; salad; flask; sad dad"
+      ]
+    },
+    {
+      "id": "module_05",
+      "order": 5,
+      "title": "Center Reach",
+      "phase": "foundation",
+      "objective": "G / H",
+      "focus": "G / H",
+      "introducedKeys": [
+        "g",
+        "h"
+      ],
+      "allowedCharacters": " ;adfghijkls",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_05"
+      ],
+      "builtInTextId": "builtin_05",
+      "fallbackDrills": [
+        "glad had a flag; hall has a dash; hash glass"
+      ]
+    },
+    {
+      "id": "module_06",
+      "order": 6,
+      "title": "Easy Vowels",
+      "phase": "foundation",
+      "objective": "E / I",
+      "focus": "E / I",
+      "introducedKeys": [
+        "e",
+        "t"
+      ],
+      "allowedCharacters": " ;adefghijklst",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_06"
+      ],
+      "builtInTextId": "builtin_06",
+      "fallbackDrills": [
+        "she is safe; he is idle; a fish is at ease"
+      ]
+    },
+    {
+      "id": "module_07",
+      "order": 7,
+      "title": "Reach Up",
+      "phase": "foundation",
+      "objective": "R / U",
+      "focus": "R / U",
+      "introducedKeys": [
+        "r",
+        "u"
+      ],
+      "allowedCharacters": " ;adefghijklrstu",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_07"
+      ],
+      "builtInTextId": "builtin_07",
+      "fallbackDrills": [
+        "a user is sure; her hair is red; rush; rule"
+      ]
+    },
+    {
+      "id": "module_08",
+      "order": 8,
+      "title": "Wide Reach",
+      "phase": "foundation",
+      "objective": "W / O",
+      "focus": "W / O",
+      "introducedKeys": [
+        "n",
+        "o",
+        "w"
+      ],
+      "allowedCharacters": " ;adefghijklnorstuw",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_08"
+      ],
+      "builtInTextId": "builtin_08",
+      "fallbackDrills": [
+        "we row; our world is wide; slow down; glow"
+      ]
+    },
+    {
+      "id": "module_09",
+      "order": 9,
+      "title": "Outer Top Row",
+      "phase": "foundation",
+      "objective": "Q / P",
+      "focus": "Q / P",
+      "introducedKeys": [
+        "p",
+        "q"
+      ],
+      "allowedCharacters": " ;adefghijklnopqrstuw",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_09"
+      ],
+      "builtInTextId": "builtin_09",
+      "fallbackDrills": [
+        "people read paper; power up; popular; equip"
+      ]
+    },
+    {
+      "id": "module_10",
+      "order": 10,
+      "title": "Top Row Finish",
+      "phase": "foundation",
+      "objective": "T / Y",
+      "focus": "T / Y",
+      "introducedKeys": [
+        "y"
+      ],
+      "allowedCharacters": " ;adefghijklnopqrstuwy",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_10"
+      ],
+      "builtInTextId": "builtin_10",
+      "fallbackDrills": [
+        "type your way; try a short route; stay ready"
+      ]
+    },
+    {
+      "id": "module_11",
+      "order": 11,
+      "title": "Lower Center",
+      "phase": "foundation",
+      "objective": "C / M",
+      "focus": "C / M",
+      "introducedKeys": [
+        "c",
+        "m",
+        "x"
+      ],
+      "allowedCharacters": " ;acdefghijklmnopqrstuwxy",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_11"
+      ],
+      "builtInTextId": "builtin_11",
+      "fallbackDrills": [
+        "make a calm choice; type more; mix a calm pace"
+      ]
+    },
+    {
+      "id": "module_12",
+      "order": 12,
+      "title": "Lower Reach",
+      "phase": "foundation",
+      "objective": "V / N",
+      "focus": "V / N",
+      "introducedKeys": [
+        "v"
+      ],
+      "allowedCharacters": " ;acdefghijklmnopqrstuvwxy",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_12"
+      ],
+      "builtInTextId": "builtin_12",
+      "fallbackDrills": [
+        "never give in; move on; every run can win"
+      ]
+    },
+    {
+      "id": "module_13",
+      "order": 13,
+      "title": "Bottom Stretch",
+      "phase": "foundation",
+      "objective": "X / B",
+      "focus": "X / B",
+      "introducedKeys": [
+        "b"
+      ],
+      "allowedCharacters": " ;abcdefghijklmnopqrstuvwxy",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_13"
+      ],
+      "builtInTextId": "builtin_13",
+      "fallbackDrills": [
+        "mix the box; bring extra vibe; big move; next"
+      ]
+    },
+    {
+      "id": "module_14",
+      "order": 14,
+      "title": "Full Alphabet",
+      "phase": "foundation",
+      "objective": "Z",
+      "focus": "Z",
+      "introducedKeys": [
+        "z"
+      ],
+      "allowedCharacters": " ;abcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_14"
+      ],
+      "builtInTextId": "builtin_14",
+      "fallbackDrills": [
+        "zoom past the lazy zone; quiz; jazz; zigzag"
+      ]
+    },
+    {
+      "id": "module_15",
+      "order": 15,
+      "title": "Shift Control",
+      "phase": "foundation",
+      "objective": "Capital letters",
+      "focus": "Capital letters",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_15"
+      ],
+      "builtInTextId": "builtin_15",
+      "fallbackDrills": [
+        "Start Calm Keep Going Build Rhythm"
+      ]
+    },
+    {
+      "id": "module_16",
+      "order": 16,
+      "title": "Clean Stops",
+      "phase": "foundation",
+      "objective": "Period / comma",
+      "focus": "Period / comma",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 2,
+      "targetAccuracy": 0.9,
+      "targetMastery": 0.6,
+      "maxHintRate": 0.2,
+      "lessonIds": [
+        "builtin_16"
+      ],
+      "builtInTextId": "builtin_16",
+      "fallbackDrills": [
+        "Start smooth, stay relaxed. Accuracy comes before speed."
+      ]
+    },
+    {
+      "id": "module_17",
+      "order": 17,
+      "title": "Contractions",
+      "phase": "fluency",
+      "objective": "Apostrophe",
+      "focus": "Apostrophe",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_17"
+      ],
+      "builtInTextId": "builtin_17",
+      "fallbackDrills": [
+        "You're learning the motion. Don't rush; keep your hands relaxed."
+      ]
+    },
+    {
+      "id": "module_18",
+      "order": 18,
+      "title": "Questions",
+      "phase": "fluency",
+      "objective": "Question mark / exclamation",
+      "focus": "Question mark / exclamation",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_18"
+      ],
+      "builtInTextId": "builtin_18",
+      "fallbackDrills": [
+        "Ready for one more round? Keep it clean, then speed up!"
+      ]
+    },
+    {
+      "id": "module_19",
+      "order": 19,
+      "title": "Quoted Text",
+      "phase": "fluency",
+      "objective": "Quotation marks",
+      "focus": "Quotation marks",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_19"
+      ],
+      "builtInTextId": "builtin_19",
+      "fallbackDrills": [
+        "The coach said, \"Find the rhythm, then let the speed follow.\""
+      ]
+    },
+    {
+      "id": "module_20",
+      "order": 20,
+      "title": "Number Row I",
+      "phase": "fluency",
+      "objective": "1\u20135",
+      "focus": "1\u20135",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_20"
+      ],
+      "builtInTextId": "builtin_20",
+      "fallbackDrills": [
+        "Run 1 lap, rest 2 minutes, then type 3 clean rounds at 4 or 5 words per burst."
+      ]
+    },
+    {
+      "id": "module_21",
+      "order": 21,
+      "title": "Number Row II",
+      "phase": "fluency",
+      "objective": "6\u20130",
+      "focus": "6\u20130",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_21"
+      ],
+      "builtInTextId": "builtin_21",
+      "fallbackDrills": [
+        "Try 6 steady lines, 7 calm breaths, 8 clean starts, 9 smooth finishes, and 10 relaxed resets."
+      ]
+    },
+    {
+      "id": "module_22",
+      "order": 22,
+      "title": "Hyphens",
+      "phase": "fluency",
+      "objective": "Hyphenated words",
+      "focus": "Hyphenated words",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_22"
+      ],
+      "builtInTextId": "builtin_22",
+      "fallbackDrills": [
+        "A well-timed reset can turn a rough start into a clean, high-focus round."
+      ]
+    },
+    {
+      "id": "module_23",
+      "order": 23,
+      "title": "Colon + Semicolon",
+      "phase": "fluency",
+      "objective": "Advanced sentence punctuation",
+      "focus": "Advanced sentence punctuation",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_23"
+      ],
+      "builtInTextId": "builtin_23",
+      "fallbackDrills": [
+        "One rule matters most: stay relaxed; speed is useful only when control stays with it."
+      ]
+    },
+    {
+      "id": "module_24",
+      "order": 24,
+      "title": "Parentheses",
+      "phase": "fluency",
+      "objective": "Parenthetical phrases",
+      "focus": "Parenthetical phrases",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_24"
+      ],
+      "builtInTextId": "builtin_24",
+      "fallbackDrills": [
+        "A short pause (not a full stop) can help you reset your hands without losing the flow."
+      ]
+    },
+    {
+      "id": "module_25",
+      "order": 25,
+      "title": "Symbols",
+      "phase": "fluency",
+      "objective": "Common symbols",
+      "focus": "Common symbols",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_25"
+      ],
+      "builtInTextId": "builtin_25",
+      "fallbackDrills": [
+        "Your goal is simple: 95% accuracy, +1 clean round, and zero panic when a mistake happens."
+      ]
+    },
+    {
+      "id": "module_26",
+      "order": 26,
+      "title": "Common Words",
+      "phase": "fluency",
+      "objective": "High-frequency English",
+      "focus": "High-frequency English",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_26"
+      ],
+      "builtInTextId": "builtin_26",
+      "fallbackDrills": [
+        "The best typing often feels boring in a good way. Your hands know where to go, so your eyes stay on the screen."
+      ]
+    },
+    {
+      "id": "module_27",
+      "order": 27,
+      "title": "Word Rhythm",
+      "phase": "fluency",
+      "objective": "Short word groups",
+      "focus": "Short word groups",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_27"
+      ],
+      "builtInTextId": "builtin_27",
+      "fallbackDrills": [
+        "Keep a steady pace through small words, then let longer words land without forcing them."
+      ]
+    },
+    {
+      "id": "module_28",
+      "order": 28,
+      "title": "Smooth Sentences",
+      "phase": "fluency",
+      "objective": "Sentence cadence",
+      "focus": "Sentence cadence",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_28"
+      ],
+      "builtInTextId": "builtin_28",
+      "fallbackDrills": [
+        "A clean sentence is built one calm keystroke at a time. Fast typing grows from repeatable motion."
+      ]
+    },
+    {
+      "id": "module_29",
+      "order": 29,
+      "title": "Contraction Flow",
+      "phase": "fluency",
+      "objective": "Natural writing",
+      "focus": "Natural writing",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_29"
+      ],
+      "builtInTextId": "builtin_29",
+      "fallbackDrills": [
+        "It's easier to stay smooth when you're not fighting the keyboard. Let your fingers move, then return home."
+      ]
+    },
+    {
+      "id": "module_30",
+      "order": 30,
+      "title": "Capital Rhythm",
+      "phase": "fluency",
+      "objective": "Shift without stalling",
+      "focus": "Shift without stalling",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_30"
+      ],
+      "builtInTextId": "builtin_30",
+      "fallbackDrills": [
+        "Monday starts fast, Tuesday feels normal, and Friday arrives before anyone expects it."
+      ]
+    },
+    {
+      "id": "module_31",
+      "order": 31,
+      "title": "Punctuation Mix",
+      "phase": "fluency",
+      "objective": "Mixed punctuation",
+      "focus": "Mixed punctuation",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_31"
+      ],
+      "builtInTextId": "builtin_31",
+      "fallbackDrills": [
+        "Focus first, speed second: if the rhythm breaks, reset, breathe, and continue without making the mistake a big deal."
+      ]
+    },
+    {
+      "id": "module_32",
+      "order": 32,
+      "title": "One-Minute Base",
+      "phase": "fluency",
+      "objective": "First sustained passage",
+      "focus": "First sustained passage",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.93,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_32"
+      ],
+      "builtInTextId": "builtin_32",
+      "fallbackDrills": [
+        "A minute of steady typing tells you more than a five-second burst. Keep your shoulders loose, watch the screen, and aim for a pace you could repeat again."
+      ]
+    },
+    {
+      "id": "module_33",
+      "order": 33,
+      "title": "Poe: Suspense",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_33"
+      ],
+      "builtInTextId": "builtin_33",
+      "fallbackDrills": [
+        "Edgar Allan Poe builds suspense by narrowing attention. A sound, a shadow, or a single thought can become huge when a character cannot stop thinking about it."
+      ]
+    },
+    {
+      "id": "module_34",
+      "order": 34,
+      "title": "Poe: The Raven",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_34"
+      ],
+      "builtInTextId": "builtin_34",
+      "fallbackDrills": [
+        "In The Raven, repetition gives the poem a pulse. The speaker keeps returning to the same question, and the repeated answer makes the room feel smaller and darker each time."
+      ]
+    },
+    {
+      "id": "module_35",
+      "order": 35,
+      "title": "The Scarlet Letter",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_35"
+      ],
+      "builtInTextId": "builtin_35",
+      "fallbackDrills": [
+        "The Scarlet Letter asks what happens when a community turns one mistake into a permanent identity. The story keeps returning to guilt, reputation, and the difference between public judgment and private truth."
+      ]
+    },
+    {
+      "id": "module_36",
+      "order": 36,
+      "title": "Moby-Dick",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_36"
+      ],
+      "builtInTextId": "builtin_36",
+      "fallbackDrills": [
+        "Moby-Dick is more than a chase at sea. Captain Ahab turns one goal into an obsession, and the crew has to live inside the consequences of a leader who cannot let go."
+      ]
+    },
+    {
+      "id": "module_37",
+      "order": 37,
+      "title": "Huckleberry Finn",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_37"
+      ],
+      "builtInTextId": "builtin_37",
+      "fallbackDrills": [
+        "Huckleberry Finn follows a boy who keeps noticing that the rules adults defend do not always match what feels morally right. The journey becomes a test of judgment as much as adventure."
+      ]
+    },
+    {
+      "id": "module_38",
+      "order": 38,
+      "title": "The Great Gatsby",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_38"
+      ],
+      "builtInTextId": "builtin_38",
+      "fallbackDrills": [
+        "The Great Gatsby explores ambition, image, and the idea that a person can rebuild the past if they try hard enough. The glitter is obvious; the cost is easier to miss."
+      ]
+    },
+    {
+      "id": "module_39",
+      "order": 39,
+      "title": "The Red Badge of Courage",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_39"
+      ],
+      "builtInTextId": "builtin_39",
+      "fallbackDrills": [
+        "The Red Badge of Courage focuses on fear before heroism. The young soldier wants to know what he will do under pressure, but the answer only appears when the situation becomes real."
+      ]
+    },
+    {
+      "id": "module_40",
+      "order": 40,
+      "title": "The Call of the Wild",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_40"
+      ],
+      "builtInTextId": "builtin_40",
+      "fallbackDrills": [
+        "The Call of the Wild follows a dog forced to adapt to a harsher world. Strength matters, but attention, instinct, and the ability to learn quickly matter just as much."
+      ]
+    },
+    {
+      "id": "module_41",
+      "order": 41,
+      "title": "The Awakening",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_41"
+      ],
+      "builtInTextId": "builtin_41",
+      "fallbackDrills": [
+        "The Awakening follows a woman questioning the life that other people have planned for her. The novel is interested in independence, expectation, and the cost of wanting a different path."
+      ]
+    },
+    {
+      "id": "module_42",
+      "order": 42,
+      "title": "Leaves of Grass",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_42"
+      ],
+      "builtInTextId": "builtin_42",
+      "fallbackDrills": [
+        "Walt Whitman's poetry often treats ordinary life as something worth noticing. Crowds, work, movement, and the body all become part of a bigger idea about identity and connection."
+      ]
+    },
+    {
+      "id": "module_43",
+      "order": 43,
+      "title": "Emily Dickinson",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_43"
+      ],
+      "builtInTextId": "builtin_43",
+      "fallbackDrills": [
+        "Emily Dickinson can turn a small image into a large question. A room, a bird, a pause, or a moment of silence can suddenly become a way to think about time, fear, hope, or death."
+      ]
+    },
+    {
+      "id": "module_44",
+      "order": 44,
+      "title": "Frederick Douglass",
+      "phase": "literature",
+      "objective": "American literature \u2014 original commentary",
+      "focus": "American literature \u2014 original commentary",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_44"
+      ],
+      "builtInTextId": "builtin_44",
+      "fallbackDrills": [
+        "Frederick Douglass writes about literacy as power. Learning to read did not simply give him information; it changed what he could understand about freedom, control, and the world around him."
+      ]
+    },
+    {
+      "id": "module_45",
+      "order": 45,
+      "title": "The Crucible",
+      "phase": "literature",
+      "objective": "High-school literature \u2014 original commentary only",
+      "focus": "High-school literature \u2014 original commentary only",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_45"
+      ],
+      "builtInTextId": "builtin_45",
+      "fallbackDrills": [
+        "The Crucible shows how fear can spread through a community faster than evidence. Once reputation and accusation become weapons, people start making choices based on survival instead of truth."
+      ]
+    },
+    {
+      "id": "module_46",
+      "order": 46,
+      "title": "Of Mice and Men",
+      "phase": "literature",
+      "objective": "High-school literature \u2014 original commentary only",
+      "focus": "High-school literature \u2014 original commentary only",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_46"
+      ],
+      "builtInTextId": "builtin_46",
+      "fallbackDrills": [
+        "Of Mice and Men centers on friendship, work, and fragile plans for a better future. George and Lennie keep returning to the same dream because imagining it gives their difficult life a direction."
+      ]
+    },
+    {
+      "id": "module_47",
+      "order": 47,
+      "title": "To Kill a Mockingbird",
+      "phase": "literature",
+      "objective": "High-school literature \u2014 original commentary only",
+      "focus": "High-school literature \u2014 original commentary only",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_47"
+      ],
+      "builtInTextId": "builtin_47",
+      "fallbackDrills": [
+        "To Kill a Mockingbird looks at justice through a child's changing perspective. As Scout learns more about the adults around her, simple ideas about fairness become more complicated."
+      ]
+    },
+    {
+      "id": "module_48",
+      "order": 48,
+      "title": "Fahrenheit 451",
+      "phase": "literature",
+      "objective": "High-school literature \u2014 original commentary only",
+      "focus": "High-school literature \u2014 original commentary only",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_48"
+      ],
+      "builtInTextId": "builtin_48",
+      "fallbackDrills": [
+        "Fahrenheit 451 imagines a society where distraction is easier than reflection. The story asks what happens when people stop choosing difficult ideas because quick entertainment feels more comfortable."
+      ]
+    },
+    {
+      "id": "module_49",
+      "order": 49,
+      "title": "Cross-Country Morning",
+      "phase": "modern",
+      "objective": "Gen Z / running",
+      "focus": "Gen Z / running",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_49"
+      ],
+      "builtInTextId": "builtin_49",
+      "fallbackDrills": [
+        "The first mile can feel awkward even when you're fit. Your breathing is still settling, your legs are waking up, and the goal is not to win the warm-up. The goal is to find a pace you can own."
+      ]
+    },
+    {
+      "id": "module_50",
+      "order": 50,
+      "title": "Game Patch Notes",
+      "phase": "modern",
+      "objective": "Gen Z / gaming",
+      "focus": "Gen Z / gaming",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_50"
+      ],
+      "builtInTextId": "builtin_50",
+      "fallbackDrills": [
+        "A good game update changes just enough to make players rethink old habits. One weapon gets weaker, another gets useful, and suddenly everyone has to test what actually works instead of copying yesterday's strategy."
+      ]
+    },
+    {
+      "id": "module_51",
+      "order": 51,
+      "title": "Group Chat Timing",
+      "phase": "modern",
+      "objective": "Gen Z / social",
+      "focus": "Gen Z / social",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_51"
+      ],
+      "builtInTextId": "builtin_51",
+      "fallbackDrills": [
+        "A group chat moves fast until someone sends a serious question. Then the typing bubbles appear, disappear, and appear again. Sometimes the most useful reply is the one that took an extra minute to think through."
+      ]
+    },
+    {
+      "id": "module_52",
+      "order": 52,
+      "title": "Algorithm Feed",
+      "phase": "modern",
+      "objective": "Gen Z / internet culture",
+      "focus": "Gen Z / internet culture",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_52"
+      ],
+      "builtInTextId": "builtin_52",
+      "fallbackDrills": [
+        "An algorithm learns what keeps your attention, not necessarily what improves your day. If every swipe gives it more data, choosing when to stop becomes part of using the app instead of being used by it."
+      ]
+    },
+    {
+      "id": "module_53",
+      "order": 53,
+      "title": "Music Discovery",
+      "phase": "modern",
+      "objective": "Gen Z / music",
+      "focus": "Gen Z / music",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_53"
+      ],
+      "builtInTextId": "builtin_53",
+      "fallbackDrills": [
+        "Finding a new song can feel random, but recommendations usually follow patterns. One track leads to another, a playlist shifts your taste, and a song you skipped last month can suddenly make sense."
+      ]
+    },
+    {
+      "id": "module_54",
+      "order": 54,
+      "title": "Coding Bug",
+      "phase": "modern",
+      "objective": "Gen Z / technology",
+      "focus": "Gen Z / technology",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_54"
+      ],
+      "builtInTextId": "builtin_54",
+      "fallbackDrills": [
+        "The bug looked impossible until one line changed. The program was not broken everywhere; one assumption was wrong near the start, and every later result faithfully repeated that mistake."
+      ]
+    },
+    {
+      "id": "module_55",
+      "order": 55,
+      "title": "AI as a Tool",
+      "phase": "modern",
+      "objective": "Gen Z / technology",
+      "focus": "Gen Z / technology",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_55"
+      ],
+      "builtInTextId": "builtin_55",
+      "fallbackDrills": [
+        "AI is useful when the goal is clear. Ask it to explain, compare, generate a practice set, or challenge an idea. The better the task is defined, the easier it is to judge whether the answer actually helps."
+      ]
+    },
+    {
+      "id": "module_56",
+      "order": 56,
+      "title": "Passkeys",
+      "phase": "modern",
+      "objective": "Gen Z / security",
+      "focus": "Gen Z / security",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_56"
+      ],
+      "builtInTextId": "builtin_56",
+      "fallbackDrills": [
+        "A passkey replaces a password with a cryptographic credential stored on a trusted device or security key. The site verifies that credential without needing you to memorize another secret phrase."
+      ]
+    },
+    {
+      "id": "module_57",
+      "order": 57,
+      "title": "Space Signal",
+      "phase": "modern",
+      "objective": "Science / fiction",
+      "focus": "Science / fiction",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_57"
+      ],
+      "builtInTextId": "builtin_57",
+      "fallbackDrills": [
+        "The signal appeared for eleven seconds, vanished, and returned at the same interval. Nobody called it alien. Not yet. The interesting part was simpler: something out there was repeating on purpose."
+      ]
+    },
+    {
+      "id": "module_58",
+      "order": 58,
+      "title": "Climate Data",
+      "phase": "modern",
+      "objective": "Science",
+      "focus": "Science",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_58"
+      ],
+      "builtInTextId": "builtin_58",
+      "fallbackDrills": [
+        "One unusually hot day does not prove a climate trend, just as one cold day does not disprove one. Scientists look at patterns across years, regions, oceans, ice, air, and many different measurements."
+      ]
+    },
+    {
+      "id": "module_59",
+      "order": 59,
+      "title": "Study Sprint",
+      "phase": "modern",
+      "objective": "School / productivity",
+      "focus": "School / productivity",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_59"
+      ],
+      "builtInTextId": "builtin_59",
+      "fallbackDrills": [
+        "A focused twenty-minute study sprint can beat an hour of switching between tabs. Pick one task, remove the easy distractions, and finish a clear chunk before deciding what comes next."
+      ]
+    },
+    {
+      "id": "module_60",
+      "order": 60,
+      "title": "Debate Prep",
+      "phase": "modern",
+      "objective": "School / reasoning",
+      "focus": "School / reasoning",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_60"
+      ],
+      "builtInTextId": "builtin_60",
+      "fallbackDrills": [
+        "A strong argument does more than repeat a claim. It gives evidence, explains why that evidence matters, and takes the best opposing point seriously enough to answer it."
+      ]
+    },
+    {
+      "id": "module_61",
+      "order": 61,
+      "title": "Short Story: Last Bus",
+      "phase": "modern",
+      "objective": "Original fiction",
+      "focus": "Original fiction",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_61"
+      ],
+      "builtInTextId": "builtin_61",
+      "fallbackDrills": [
+        "The bus doors closed just as Maya reached the corner. Instead of chasing it, she stopped. Across the street, a small bookstore still had its lights on, and a handwritten sign promised free hot chocolate after eight."
+      ]
+    },
+    {
+      "id": "module_62",
+      "order": 62,
+      "title": "Short Story: Save Point",
+      "phase": "modern",
+      "objective": "Original fiction",
+      "focus": "Original fiction",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_62"
+      ],
+      "builtInTextId": "builtin_62",
+      "fallbackDrills": [
+        "Leo had restarted the level six times, but the seventh run felt different. He stopped rushing the opening section, saved his best move for the hard part, and reached the final room with more health than ever."
+      ]
+    },
+    {
+      "id": "module_63",
+      "order": 63,
+      "title": "Endurance Passage",
+      "phase": "modern",
+      "objective": "Long-form control",
+      "focus": "Long-form control",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_63"
+      ],
+      "builtInTextId": "builtin_63",
+      "fallbackDrills": [
+        "Speed is exciting because it is easy to notice, but endurance is quieter. Real fluency means holding a useful pace while sentences get longer, punctuation changes, and attention starts to drift. The goal is not a perfect line. The goal is control that lasts."
+      ]
+    },
+    {
+      "id": "module_64",
+      "order": 64,
+      "title": "Personal Best",
+      "phase": "modern",
+      "objective": "Final mixed challenge",
+      "focus": "Final mixed challenge",
+      "introducedKeys": [],
+      "allowedCharacters": " !\"%'()+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+      "minimumCompletedDrills": 3,
+      "targetAccuracy": 0.95,
+      "targetMastery": 0.72,
+      "maxHintRate": 0.15,
+      "lessonIds": [
+        "builtin_64"
+      ],
+      "builtInTextId": "builtin_64",
+      "fallbackDrills": [
+        "A personal best is not proof that every future session will be faster. It is proof that the skill exists. Good training makes that performance easier to repeat, even on an ordinary day when the keyboard feels less automatic."
+      ]
+    }
   ],
   "lessons": [
-    {"id":"orientation-1","stageId":"orientation","title":"Find Your Anchors","text":"fj jf fj jf"},
-    {"id":"home-anchors-1","stageId":"home_anchors","title":"Anchor Rhythm","text":"fj jf ff jj fj jf"},
-    {"id":"home-left-1","stageId":"home_left","title":"Left Hand Control","text":"asdf sad fad"},
-    {"id":"home-right-1","stageId":"home_right","title":"Right Hand Control","text":"jkl; jkl; fj fj"},
-    {"id":"home-all-1","stageId":"home_all","title":"Home Row Flow","text":"asdf ghjkl; asdf ghjkl;"},
-    {"id":"top-left-1","stageId":"top_left","title":"Reach Up Left","text":"qwert wert fret tree"},
-    {"id":"top-right-1","stageId":"top_right","title":"Reach Up Right","text":"yuiop you pour oil"},
-    {"id":"top-all-1","stageId":"top_all","title":"Top Row Flow","text":"type with a light steady flow"},
-    {"id":"bottom-left-1","stageId":"bottom_left","title":"Reach Down Left","text":"zxcvb cave box vibe"},
-    {"id":"bottom-right-1","stageId":"bottom_right","title":"Reach Down Right","text":"move in a calm rhythm."},
-    {"id":"lowercase-1","stageId":"lowercase_letters","title":"All Lowercase","text":"the quick brown fox jumps over the lazy dog"},
-    {"id":"capitals-1","stageId":"shift_capitals","title":"Capital Control","text":"Calm Hands Build Better Rhythm"},
-    {"id":"punctuation-1","stageId":"punctuation_basic","title":"Punctuation Rhythm","text":"Pause, breathe, and type with care."},
-    {"id":"numbers-1","stageId":"numbers","title":"Number Row","text":"Run 3 steady laps, then rest for 2 minutes."},
-    {"id":"sentences-1","stageId":"short_sentences","title":"Short Sentences","text":"Small improvements add up with each focused round."},
-    {"id":"paragraphs-1","stageId":"paragraphs","title":"Sustained Paragraph","text":"A steady pace is easier to sustain than a rushed start. Keep your hands relaxed, notice the next word, and let accuracy guide the rhythm of each sentence."}
+    {
+      "id": "builtin_01",
+      "stageId": "module_01",
+      "moduleId": "module_01",
+      "title": "Anchor Keys",
+      "text": "f j f j fj jf f j jf fj",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_02",
+      "stageId": "module_02",
+      "moduleId": "module_02",
+      "title": "Left Home",
+      "text": "asdf fdsa sad fad dad sass",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_03",
+      "stageId": "module_03",
+      "moduleId": "module_03",
+      "title": "Right Home",
+      "text": "jkl; ;lkj jill silk ;lkj",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_04",
+      "stageId": "module_04",
+      "moduleId": "module_04",
+      "title": "Home Row Mix",
+      "text": "ask a lad; fall; salad; flask; sad dad",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_05",
+      "stageId": "module_05",
+      "moduleId": "module_05",
+      "title": "Center Reach",
+      "text": "glad had a flag; hall has a dash; hash glass",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_06",
+      "stageId": "module_06",
+      "moduleId": "module_06",
+      "title": "Easy Vowels",
+      "text": "she is safe; he is idle; a fish is at ease",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_07",
+      "stageId": "module_07",
+      "moduleId": "module_07",
+      "title": "Reach Up",
+      "text": "a user is sure; her hair is red; rush; rule",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_08",
+      "stageId": "module_08",
+      "moduleId": "module_08",
+      "title": "Wide Reach",
+      "text": "we row; our world is wide; slow down; glow",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_09",
+      "stageId": "module_09",
+      "moduleId": "module_09",
+      "title": "Outer Top Row",
+      "text": "people read paper; power up; popular; equip",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_10",
+      "stageId": "module_10",
+      "moduleId": "module_10",
+      "title": "Top Row Finish",
+      "text": "type your way; try a short route; stay ready",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_11",
+      "stageId": "module_11",
+      "moduleId": "module_11",
+      "title": "Lower Center",
+      "text": "make a calm choice; type more; mix a calm pace",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_12",
+      "stageId": "module_12",
+      "moduleId": "module_12",
+      "title": "Lower Reach",
+      "text": "never give in; move on; every run can win",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_13",
+      "stageId": "module_13",
+      "moduleId": "module_13",
+      "title": "Bottom Stretch",
+      "text": "mix the box; bring extra vibe; big move; next",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_14",
+      "stageId": "module_14",
+      "moduleId": "module_14",
+      "title": "Full Alphabet",
+      "text": "zoom past the lazy zone; quiz; jazz; zigzag",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_15",
+      "stageId": "module_15",
+      "moduleId": "module_15",
+      "title": "Shift Control",
+      "text": "Start Calm Keep Going Build Rhythm",
+      "sourceType": "typing_drill",
+      "tags": [
+        "foundation",
+        "typing_drill"
+      ]
+    },
+    {
+      "id": "builtin_16",
+      "stageId": "module_16",
+      "moduleId": "module_16",
+      "title": "Clean Stops",
+      "text": "Start smooth, stay relaxed. Accuracy comes before speed.",
+      "sourceType": "original",
+      "tags": [
+        "foundation",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_17",
+      "stageId": "module_17",
+      "moduleId": "module_17",
+      "title": "Contractions",
+      "text": "You're learning the motion. Don't rush; keep your hands relaxed.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_18",
+      "stageId": "module_18",
+      "moduleId": "module_18",
+      "title": "Questions",
+      "text": "Ready for one more round? Keep it clean, then speed up!",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_19",
+      "stageId": "module_19",
+      "moduleId": "module_19",
+      "title": "Quoted Text",
+      "text": "The coach said, \"Find the rhythm, then let the speed follow.\"",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_20",
+      "stageId": "module_20",
+      "moduleId": "module_20",
+      "title": "Number Row I",
+      "text": "Run 1 lap, rest 2 minutes, then type 3 clean rounds at 4 or 5 words per burst.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_21",
+      "stageId": "module_21",
+      "moduleId": "module_21",
+      "title": "Number Row II",
+      "text": "Try 6 steady lines, 7 calm breaths, 8 clean starts, 9 smooth finishes, and 10 relaxed resets.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_22",
+      "stageId": "module_22",
+      "moduleId": "module_22",
+      "title": "Hyphens",
+      "text": "A well-timed reset can turn a rough start into a clean, high-focus round.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_23",
+      "stageId": "module_23",
+      "moduleId": "module_23",
+      "title": "Colon + Semicolon",
+      "text": "One rule matters most: stay relaxed; speed is useful only when control stays with it.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_24",
+      "stageId": "module_24",
+      "moduleId": "module_24",
+      "title": "Parentheses",
+      "text": "A short pause (not a full stop) can help you reset your hands without losing the flow.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_25",
+      "stageId": "module_25",
+      "moduleId": "module_25",
+      "title": "Symbols",
+      "text": "Your goal is simple: 95% accuracy, +1 clean round, and zero panic when a mistake happens.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_26",
+      "stageId": "module_26",
+      "moduleId": "module_26",
+      "title": "Common Words",
+      "text": "The best typing often feels boring in a good way. Your hands know where to go, so your eyes stay on the screen.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_27",
+      "stageId": "module_27",
+      "moduleId": "module_27",
+      "title": "Word Rhythm",
+      "text": "Keep a steady pace through small words, then let longer words land without forcing them.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_28",
+      "stageId": "module_28",
+      "moduleId": "module_28",
+      "title": "Smooth Sentences",
+      "text": "A clean sentence is built one calm keystroke at a time. Fast typing grows from repeatable motion.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_29",
+      "stageId": "module_29",
+      "moduleId": "module_29",
+      "title": "Contraction Flow",
+      "text": "It's easier to stay smooth when you're not fighting the keyboard. Let your fingers move, then return home.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_30",
+      "stageId": "module_30",
+      "moduleId": "module_30",
+      "title": "Capital Rhythm",
+      "text": "Monday starts fast, Tuesday feels normal, and Friday arrives before anyone expects it.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_31",
+      "stageId": "module_31",
+      "moduleId": "module_31",
+      "title": "Punctuation Mix",
+      "text": "Focus first, speed second: if the rhythm breaks, reset, breathe, and continue without making the mistake a big deal.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_32",
+      "stageId": "module_32",
+      "moduleId": "module_32",
+      "title": "One-Minute Base",
+      "text": "A minute of steady typing tells you more than a five-second burst. Keep your shoulders loose, watch the screen, and aim for a pace you could repeat again.",
+      "sourceType": "original",
+      "tags": [
+        "fluency",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_33",
+      "stageId": "module_33",
+      "moduleId": "module_33",
+      "title": "Poe: Suspense",
+      "text": "Edgar Allan Poe builds suspense by narrowing attention. A sound, a shadow, or a single thought can become huge when a character cannot stop thinking about it.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Poe: Suspense",
+      "literatureAuthor": "Edgar Allan Poe"
+    },
+    {
+      "id": "builtin_34",
+      "stageId": "module_34",
+      "moduleId": "module_34",
+      "title": "Poe: The Raven",
+      "text": "In The Raven, repetition gives the poem a pulse. The speaker keeps returning to the same question, and the repeated answer makes the room feel smaller and darker each time.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Poe: The Raven",
+      "literatureAuthor": "Edgar Allan Poe"
+    },
+    {
+      "id": "builtin_35",
+      "stageId": "module_35",
+      "moduleId": "module_35",
+      "title": "The Scarlet Letter",
+      "text": "The Scarlet Letter asks what happens when a community turns one mistake into a permanent identity. The story keeps returning to guilt, reputation, and the difference between public judgment and private truth.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "The Scarlet Letter",
+      "literatureAuthor": "Nathaniel Hawthorne"
+    },
+    {
+      "id": "builtin_36",
+      "stageId": "module_36",
+      "moduleId": "module_36",
+      "title": "Moby-Dick",
+      "text": "Moby-Dick is more than a chase at sea. Captain Ahab turns one goal into an obsession, and the crew has to live inside the consequences of a leader who cannot let go.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Moby-Dick",
+      "literatureAuthor": "Herman Melville"
+    },
+    {
+      "id": "builtin_37",
+      "stageId": "module_37",
+      "moduleId": "module_37",
+      "title": "Huckleberry Finn",
+      "text": "Huckleberry Finn follows a boy who keeps noticing that the rules adults defend do not always match what feels morally right. The journey becomes a test of judgment as much as adventure.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Huckleberry Finn",
+      "literatureAuthor": "Mark Twain"
+    },
+    {
+      "id": "builtin_38",
+      "stageId": "module_38",
+      "moduleId": "module_38",
+      "title": "The Great Gatsby",
+      "text": "The Great Gatsby explores ambition, image, and the idea that a person can rebuild the past if they try hard enough. The glitter is obvious; the cost is easier to miss.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "The Great Gatsby",
+      "literatureAuthor": "F. Scott Fitzgerald"
+    },
+    {
+      "id": "builtin_39",
+      "stageId": "module_39",
+      "moduleId": "module_39",
+      "title": "The Red Badge of Courage",
+      "text": "The Red Badge of Courage focuses on fear before heroism. The young soldier wants to know what he will do under pressure, but the answer only appears when the situation becomes real.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "The Red Badge of Courage",
+      "literatureAuthor": "Stephen Crane"
+    },
+    {
+      "id": "builtin_40",
+      "stageId": "module_40",
+      "moduleId": "module_40",
+      "title": "The Call of the Wild",
+      "text": "The Call of the Wild follows a dog forced to adapt to a harsher world. Strength matters, but attention, instinct, and the ability to learn quickly matter just as much.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "The Call of the Wild",
+      "literatureAuthor": "Jack London"
+    },
+    {
+      "id": "builtin_41",
+      "stageId": "module_41",
+      "moduleId": "module_41",
+      "title": "The Awakening",
+      "text": "The Awakening follows a woman questioning the life that other people have planned for her. The novel is interested in independence, expectation, and the cost of wanting a different path.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "The Awakening",
+      "literatureAuthor": "Kate Chopin"
+    },
+    {
+      "id": "builtin_42",
+      "stageId": "module_42",
+      "moduleId": "module_42",
+      "title": "Leaves of Grass",
+      "text": "Walt Whitman's poetry often treats ordinary life as something worth noticing. Crowds, work, movement, and the body all become part of a bigger idea about identity and connection.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Leaves of Grass",
+      "literatureAuthor": "Walt Whitman"
+    },
+    {
+      "id": "builtin_43",
+      "stageId": "module_43",
+      "moduleId": "module_43",
+      "title": "Emily Dickinson",
+      "text": "Emily Dickinson can turn a small image into a large question. A room, a bird, a pause, or a moment of silence can suddenly become a way to think about time, fear, hope, or death.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Emily Dickinson",
+      "literatureAuthor": "Emily Dickinson"
+    },
+    {
+      "id": "builtin_44",
+      "stageId": "module_44",
+      "moduleId": "module_44",
+      "title": "Frederick Douglass",
+      "text": "Frederick Douglass writes about literacy as power. Learning to read did not simply give him information; it changed what he could understand about freedom, control, and the world around him.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Frederick Douglass",
+      "literatureAuthor": "Frederick Douglass"
+    },
+    {
+      "id": "builtin_45",
+      "stageId": "module_45",
+      "moduleId": "module_45",
+      "title": "The Crucible",
+      "text": "The Crucible shows how fear can spread through a community faster than evidence. Once reputation and accusation become weapons, people start making choices based on survival instead of truth.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "The Crucible",
+      "literatureAuthor": "Arthur Miller"
+    },
+    {
+      "id": "builtin_46",
+      "stageId": "module_46",
+      "moduleId": "module_46",
+      "title": "Of Mice and Men",
+      "text": "Of Mice and Men centers on friendship, work, and fragile plans for a better future. George and Lennie keep returning to the same dream because imagining it gives their difficult life a direction.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Of Mice and Men",
+      "literatureAuthor": "John Steinbeck"
+    },
+    {
+      "id": "builtin_47",
+      "stageId": "module_47",
+      "moduleId": "module_47",
+      "title": "To Kill a Mockingbird",
+      "text": "To Kill a Mockingbird looks at justice through a child's changing perspective. As Scout learns more about the adults around her, simple ideas about fairness become more complicated.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "To Kill a Mockingbird",
+      "literatureAuthor": "Harper Lee"
+    },
+    {
+      "id": "builtin_48",
+      "stageId": "module_48",
+      "moduleId": "module_48",
+      "title": "Fahrenheit 451",
+      "text": "Fahrenheit 451 imagines a society where distraction is easier than reflection. The story asks what happens when people stop choosing difficult ideas because quick entertainment feels more comfortable.",
+      "sourceType": "original_commentary",
+      "tags": [
+        "american_literature",
+        "high_school",
+        "original_commentary"
+      ],
+      "literatureWork": "Fahrenheit 451",
+      "literatureAuthor": "Ray Bradbury"
+    },
+    {
+      "id": "builtin_49",
+      "stageId": "module_49",
+      "moduleId": "module_49",
+      "title": "Cross-Country Morning",
+      "text": "The first mile can feel awkward even when you're fit. Your breathing is still settling, your legs are waking up, and the goal is not to win the warm-up. The goal is to find a pace you can own.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_50",
+      "stageId": "module_50",
+      "moduleId": "module_50",
+      "title": "Game Patch Notes",
+      "text": "A good game update changes just enough to make players rethink old habits. One weapon gets weaker, another gets useful, and suddenly everyone has to test what actually works instead of copying yesterday's strategy.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_51",
+      "stageId": "module_51",
+      "moduleId": "module_51",
+      "title": "Group Chat Timing",
+      "text": "A group chat moves fast until someone sends a serious question. Then the typing bubbles appear, disappear, and appear again. Sometimes the most useful reply is the one that took an extra minute to think through.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_52",
+      "stageId": "module_52",
+      "moduleId": "module_52",
+      "title": "Algorithm Feed",
+      "text": "An algorithm learns what keeps your attention, not necessarily what improves your day. If every swipe gives it more data, choosing when to stop becomes part of using the app instead of being used by it.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_53",
+      "stageId": "module_53",
+      "moduleId": "module_53",
+      "title": "Music Discovery",
+      "text": "Finding a new song can feel random, but recommendations usually follow patterns. One track leads to another, a playlist shifts your taste, and a song you skipped last month can suddenly make sense.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_54",
+      "stageId": "module_54",
+      "moduleId": "module_54",
+      "title": "Coding Bug",
+      "text": "The bug looked impossible until one line changed. The program was not broken everywhere; one assumption was wrong near the start, and every later result faithfully repeated that mistake.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_55",
+      "stageId": "module_55",
+      "moduleId": "module_55",
+      "title": "AI as a Tool",
+      "text": "AI is useful when the goal is clear. Ask it to explain, compare, generate a practice set, or challenge an idea. The better the task is defined, the easier it is to judge whether the answer actually helps.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_56",
+      "stageId": "module_56",
+      "moduleId": "module_56",
+      "title": "Passkeys",
+      "text": "A passkey replaces a password with a cryptographic credential stored on a trusted device or security key. The site verifies that credential without needing you to memorize another secret phrase.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_57",
+      "stageId": "module_57",
+      "moduleId": "module_57",
+      "title": "Space Signal",
+      "text": "The signal appeared for eleven seconds, vanished, and returned at the same interval. Nobody called it alien. Not yet. The interesting part was simpler: something out there was repeating on purpose.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_58",
+      "stageId": "module_58",
+      "moduleId": "module_58",
+      "title": "Climate Data",
+      "text": "One unusually hot day does not prove a climate trend, just as one cold day does not disprove one. Scientists look at patterns across years, regions, oceans, ice, air, and many different measurements.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_59",
+      "stageId": "module_59",
+      "moduleId": "module_59",
+      "title": "Study Sprint",
+      "text": "A focused twenty-minute study sprint can beat an hour of switching between tabs. Pick one task, remove the easy distractions, and finish a clear chunk before deciding what comes next.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_60",
+      "stageId": "module_60",
+      "moduleId": "module_60",
+      "title": "Debate Prep",
+      "text": "A strong argument does more than repeat a claim. It gives evidence, explains why that evidence matters, and takes the best opposing point seriously enough to answer it.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_61",
+      "stageId": "module_61",
+      "moduleId": "module_61",
+      "title": "Short Story: Last Bus",
+      "text": "The bus doors closed just as Maya reached the corner. Instead of chasing it, she stopped. Across the street, a small bookstore still had its lights on, and a handwritten sign promised free hot chocolate after eight.",
+      "sourceType": "original_fiction",
+      "tags": [
+        "modern",
+        "original_fiction"
+      ]
+    },
+    {
+      "id": "builtin_62",
+      "stageId": "module_62",
+      "moduleId": "module_62",
+      "title": "Short Story: Save Point",
+      "text": "Leo had restarted the level six times, but the seventh run felt different. He stopped rushing the opening section, saved his best move for the hard part, and reached the final room with more health than ever.",
+      "sourceType": "original_fiction",
+      "tags": [
+        "modern",
+        "original_fiction"
+      ]
+    },
+    {
+      "id": "builtin_63",
+      "stageId": "module_63",
+      "moduleId": "module_63",
+      "title": "Endurance Passage",
+      "text": "Speed is exciting because it is easy to notice, but endurance is quieter. Real fluency means holding a useful pace while sentences get longer, punctuation changes, and attention starts to drift. The goal is not a perfect line. The goal is control that lasts.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    },
+    {
+      "id": "builtin_64",
+      "stageId": "module_64",
+      "moduleId": "module_64",
+      "title": "Personal Best",
+      "text": "A personal best is not proof that every future session will be faster. It is proof that the skill exists. Good training makes that performance easier to repeat, even on an ordinary day when the keyboard feels less automatic.",
+      "sourceType": "original",
+      "tags": [
+        "modern",
+        "original"
+      ]
+    }
   ]
 }

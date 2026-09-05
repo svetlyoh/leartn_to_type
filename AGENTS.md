@@ -1,6 +1,6 @@
 # Project instructions
 
-- Treat `LEARN_TO_TYPE_CODEX_BUILD_SPEC_REV9_SIMPLIFIED_USER_ACCESS.md` as the primary source of truth. REV9 overrides earlier learner/profile PIN and normal-flow admin requirements.
+- Treat `LEARN_TO_TYPE_CODEX_BUILD_SPEC_REV10_64_MODULES_64_TEXTS.md` as the primary source of truth. REV10 preserves REV9 behavior and expands only the curriculum/content catalog.
 - Preserve user progress and migration history. Never reset D1 or browser data silently.
 - Keep the keystroke path local and deterministic. Never call AI per keystroke.
 - Never commit PINs, peppers, session tokens, provider keys, account IDs, domain names, or unverified D1 UUIDs.
