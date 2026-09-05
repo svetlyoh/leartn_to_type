@@ -64,7 +64,8 @@ async def harden(request, call_next):
 
 @app.get("/", response_class=HTMLResponse)
 async def gate(request: Request):
-    return RedirectResponse("/app/", 303) if await current_session(request) else HTMLResponse(GATE)
+    session = await current_session(request)
+    return RedirectResponse("/app/", 303) if session and session.get("user_id") else HTMLResponse(GATE)
 
 @app.get("/healthz")
 async def health(): return {"ok": True}
@@ -363,13 +364,15 @@ async def logout(request: Request):
     response = JSONResponse({"ok": True}); response.delete_cookie(COOKIE, path="/", secure=True, httponly=True, samesite="strict"); return response
 
 async def serve_asset(path, request):
-    if not await current_session(request): raise HTTPException(401, "Private training access required")
+    session = await current_session(request)
+    if not session or not session.get("user_id"): raise HTTPException(401, "Passkey sign-in required")
     result = await env(request).ASSETS.fetch(f"https://assets.local/app/{path or 'index.html'}")
     return Response(await result.bytes(), status_code=result.status, headers=result.headers)
 
 @app.get("/app")
 async def private_app_redirect(request: Request):
-    if not await current_session(request): raise HTTPException(401, "Private training access required")
+    session = await current_session(request)
+    if not session or not session.get("user_id"): return RedirectResponse("/", 303)
     return RedirectResponse("/app/", 308)
 
 @app.get("/app/{path:path}")
