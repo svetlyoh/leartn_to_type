@@ -101,7 +101,7 @@ Existing progress was migrated to closest REV10 module IDs. Key mastery and save
 
 - Physical QWERTY geometry is independent of the finger map. Locked keys stay in place, and F/J have home bumps.
 - Translucent SVG hands share key centers with the keyboard. Introduced reaches animate locally; reduced motion retains silhouettes and directional indicators.
-- Hide hands remembers the current placement; a changed module/reach restores the hands. `Shift + {` hides hands without recording a typing error. Show hands restores them.
+- Hide hands remembers the current placement; a changed module/reach restores the hands. Show hands restores them.
 - Public `/auth.css` fixes the inline-style/CSP conflict. `/auth.js` remains public and `/app/*` stays gated.
 - Login & Passkeys lists the current account's credentials, supports adding a second, and blocks third credentials and deletion of the last credential. Existing Python `webauthn` 3.0.0 remains the verifier.
 - Passkey registration challenges are consumed atomically, expire after five minutes, and management challenges are bound to the existing authenticated session.
@@ -114,5 +114,5 @@ Existing progress was migrated to closest REV10 module IDs. Key mastery and save
 - Prompt layout is selected centrally as short, standard, or passage from text length, lesson kind, and estimated duration.
 - Medium drills use a centered, readable multiline block; actual semantic spaces remain in the DOM while CSS supplies visible middle dots, so per-character styling no longer removes wrapping opportunities.
 - Prompt, lesson, console, and training-grid sizing now shrink safely with no horizontal prompt scrolling; the card grows vertically and the keyboard/hands remain in normal flow below it.
-- The hands shortcut is now the training-only `Space + {` toggle. `Shift + {` is no longer bound, ordinary Space remains immediate, and a completed toggle chord restores the pre-Space typing state so position and metrics do not change.
+- The hands shortcut is the training-only `Space + Shift + {` toggle. Ordinary Space remains immediate, and a completed toggle chord restores the pre-Space typing state so position and metrics do not change.
 - Verification details and outstanding live viewport/production acceptance are tracked in `REV13_COMPLETION_REPORT.md`.

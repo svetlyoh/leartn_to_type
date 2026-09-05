@@ -12,8 +12,8 @@ The normal prompt renderer replaced source spaces with visible middle-dot text i
 - Kept every source character in stable DOM order. Space spans now contain their real source space and draw the middle dot with CSS, preserving legal wrapping without changing typing input.
 - Added a centered 70ch prompt text block, standard/passage left alignment, short-drill centering, responsive `clamp()` typography, automatic card height, vertical-only passage scrolling, and `min-width: 0` shrink guards.
 - Kept the keyboard and SVG hands after the prompt in normal document flow.
-- Replaced the old hand binding with a capture-phase `Space + {` toggle scoped to the mounted training screen. Ordinary Space is applied immediately; if `{` completes the chord, the saved pre-Space typing state is restored before the brace can reach the typing engine. Pressed state clears on keyup, blur, visibility change, and component unmount.
-- Updated the Hide/Show controls, tooltip, visible hint, and `aria-keyshortcuts` to `Space+{`.
+- Replaced the old hand binding with a capture-phase `Space + Shift + {` toggle scoped to the mounted training screen. Ordinary Space is applied immediately; if `{` completes the chord, the saved pre-Space typing state is restored before the brace can reach the typing engine. Pressed state clears on keyup, blur, visibility change, and component unmount.
+- Updated the Hide/Show controls, tooltip, visible hint, and `aria-keyshortcuts` to `Space+Shift+{`.
 
 ## Files changed
 

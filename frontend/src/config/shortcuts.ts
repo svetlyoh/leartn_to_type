@@ -1,4 +1,4 @@
-export const TRAINING_SHORTCUTS={nextRound:'Shift+Enter',toggleAI:'F1',reshuffle:'F2',returnToTraining:'Escape',toggleHands:'Space+{'} as const;
+export const TRAINING_SHORTCUTS={nextRound:'Shift+Enter',toggleAI:'F1',reshuffle:'F2',returnToTraining:'Escape',toggleHands:'Space+Shift+{'} as const;
 export type ShortcutAction=keyof typeof TRAINING_SHORTCUTS;
 export function shortcutFor(event:Pick<KeyboardEvent,'key'|'shiftKey'|'ctrlKey'|'metaKey'|'altKey'>):ShortcutAction|null{
  if(event.ctrlKey||event.metaKey||event.altKey)return null;

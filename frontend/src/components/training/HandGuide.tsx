@@ -27,8 +27,8 @@ export function HandGuide({
             ? ` · ${info.home.toUpperCase()} → ${label} → ${info.home.toUpperCase()}`
             : ""}
         </span>
-        <button type="button" className="quiet" aria-label="Hide hands" aria-keyshortcuts="Space+{" title="Hide hands · Space + {" onClick={onHide}>
-          Hide hands <kbd aria-hidden="true">Space + {"{"}</kbd>
+        <button type="button" className="quiet" aria-label="Hide hands" aria-keyshortcuts="Space+Shift+{" title="Hide hands · Space + Shift + {" onClick={onHide}>
+          Hide hands <kbd aria-hidden="true">Space + Shift + {"{"}</kbd>
         </button>
       </div>
     </div>

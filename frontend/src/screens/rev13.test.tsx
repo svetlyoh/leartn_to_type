@@ -32,7 +32,7 @@ it("renders an 80-character drill in stable, wrap-safe standard layout", async (
   expect(container.querySelector(".prompt")!.compareDocumentPosition(container.querySelector(".physical-keyboard")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 });
 
-it("toggles hands with Space + { without changing lesson position or metrics", async () => {
+it("toggles hands with Space + Shift + { without changing lesson position or metrics", async () => {
   const { container } = render(<TrainingScreen profileId={crypto.randomUUID()} soundEnabled={false} onExit={() => {}} onClosed={() => {}} />);
   await screen.findByText("Anchor Keys");
   const before = screen.getByText(/Round progress/).textContent;
@@ -40,5 +40,5 @@ it("toggles hands with Space + { without changing lesson position or metrics", a
   fireEvent.keyDown(window, { key: "{", code: "BracketLeft", shiftKey: true });
   expect(screen.getByText(/Round progress/).textContent).toBe(before);
   expect(container.querySelectorAll("[data-hand]").length).toBe(0);
-  expect(screen.getByRole("button", { name: "Show hands" }).getAttribute("aria-keyshortcuts")).toBe("Space+{");
+  expect(screen.getByRole("button", { name: "Show hands" }).getAttribute("aria-keyshortcuts")).toBe("Space+Shift+{");
 });

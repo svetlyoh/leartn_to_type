@@ -635,7 +635,7 @@ export function TrainingScreen({
             reduceMotion={reduceMotion}
             onHide={() => setGuideVisible(false)}
           />
-          {!guideVisible && <button className="quiet" aria-keyshortcuts="Space+{" title="Show hands · Space + {" onClick={() => setGuideVisible(true)}>Show hands <kbd aria-hidden="true">Space + {"{"}</kbd></button>}
+          {!guideVisible && <button className="quiet" aria-keyshortcuts="Space+Shift+{" title="Show hands · Space + Shift + {" onClick={() => setGuideVisible(true)}>Show hands <kbd aria-hidden="true">Space + Shift + {"{"}</kbd></button>}
           {state.complete && (
             <div className="complete">
               <h2>Round complete</h2>
