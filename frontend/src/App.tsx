@@ -5,17 +5,19 @@ import{PlayerMenuScreen}from'./screens/PlayerMenuScreen';
 import{TrainingScreen}from'./screens/TrainingScreen';
 import{AccessPinScreen}from'./screens/AccessPinScreen';
 import{CreatePlayerScreen}from'./screens/CreatePlayerScreen';
+import{LoginNameScreen}from'./screens/LoginNameScreen';
 
-type Session={authenticated:boolean;role:'learner'|null;activated:boolean;activation_changed:boolean;profile:{id:string;display_name:string;character_id:string}|null};
-type Screen='loading'|'activate'|'main'|'create'|'how'|'accessibility'|'player'|'training'|'closed';
+type Session={authenticated:boolean;role:'learner'|null;activated:boolean;activation_changed:boolean;name_required:boolean;profile:{id:string;display_name:string;character_id:string}|null};
+type Screen='loading'|'activate'|'name'|'main'|'create'|'how'|'accessibility'|'player'|'training'|'closed';
 
 export default function App(){
  const[session,setSession]=useState<Session|null>(null);const[screen,setScreen]=useState<Screen>('loading');
- const refresh=async(target?:Screen)=>{const value=await api<Session>('/auth/session');if(!value.authenticated){location.assign('/');return}setSession(value);setScreen(!value.activated?'activate':target??'main')};
+ const refresh=async(target?:Screen)=>{const value=await api<Session>('/auth/session');if(!value.authenticated){location.assign('/');return}setSession(value);setScreen(!value.activated?'activate':value.name_required?'name':target??'main')};
  useEffect(()=>{refresh().catch(()=>location.assign('/'))},[]);
  const logout=async()=>{await api('/auth/logout',{method:'POST',body:'{}'});location.assign('/')};
  if(screen==='loading'||!session)return <main className="loading">Calibrating training space…</main>;
  if(screen==='activate')return <AccessPinScreen changed={session.activation_changed} onUnlocked={()=>void refresh('main')} onExit={()=>void logout()}/>;
+ if(screen==='name')return <LoginNameScreen onReady={()=>void refresh('main')}/>;
  if(screen==='create')return <CreatePlayerScreen onBack={()=>setScreen('main')} onCreated={()=>void refresh('player')}/>;
  if(screen==='player'&&session.profile)return <PlayerMenuScreen name={session.profile.display_name} characterId={session.profile.character_id} onCharacterChanged={()=>void refresh('player')} onTrain={()=>setScreen('training')} onSwitch={()=>setScreen('main')}/>;
  if(screen==='training'&&session.profile)return <TrainingScreen profileId={session.profile.id} onExit={()=>setScreen('player')} onClosed={()=>setScreen('closed')}/>;

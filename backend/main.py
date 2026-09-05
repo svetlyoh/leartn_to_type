@@ -207,7 +207,7 @@ async def site_login(request: Request):
 async def current_session(request):
     raw = request.cookies.get(COOKIE)
     if not raw: return None
-    binding = env(request); row = await first(binding.DB, "SELECT role,profile_id,user_id,expires_at,revoked_at FROM auth_sessions WHERE session_hash=?", token_hash(raw, required_secret(binding, "SESSION_PEPPER")))
+    binding = env(request); row = await first(binding.DB, "SELECT role,profile_id,user_id,name_confirmed,login_name,expires_at,revoked_at FROM auth_sessions WHERE session_hash=?", token_hash(raw, required_secret(binding, "SESSION_PEPPER")))
     if not row or row.get("revoked_at") or datetime.fromisoformat(row["expires_at"].replace("Z", "+00:00")) <= now(): return None
     return row
 
@@ -241,7 +241,7 @@ async def auth_session(request: Request):
         profile = await first(env(request).DB, "SELECT id,display_name,character_id FROM profiles WHERE user_id=? AND deleted_at IS NULL ORDER BY created_at LIMIT 1", session["user_id"])
     elif session and session.get("profile_id"):
         profile = await first(env(request).DB, "SELECT id,display_name,character_id FROM profiles WHERE id=? AND deleted_at IS NULL", session["profile_id"])
-    return {"authenticated": bool(session and session.get("user_id")), "role": session["role"] if session and session.get("user_id") else None, "activated": activated, "activation_changed": activation_changed, "profile": profile}
+    return {"authenticated": bool(session and session.get("user_id")), "role": session["role"] if session and session.get("user_id") else None, "activated": activated, "activation_changed": activation_changed, "name_required": bool(session and session.get("user_id") and activated and not int(session.get("name_confirmed") or 0)), "profile": profile}
 
 @app.post("/api/v1/auth/activate")
 async def activate(request: Request):
@@ -253,6 +253,21 @@ async def activate(request: Request):
     access = await first(binding.DB, "SELECT activation_version FROM app_access_config WHERE id=1"); timestamp = iso(now())
     await execute(binding.DB, "UPDATE users SET accepted_activation_version=?,activation_verified_at=?,updated_at=? WHERE id=?", int(access["activation_version"]), timestamp, timestamp, session["user_id"])
     return {"ok":True,"next":"/app/"}
+
+@app.post("/api/v1/auth/name")
+async def set_login_name(request: Request):
+    session = await require_session(request, "learner"); binding = env(request); body = await request.json(); name = str(body.get("name", "")).strip() or "MCP"
+    if len(name) > 40: raise HTTPException(422, "Name must be 40 characters or fewer")
+    timestamp = iso(now()); profile = await first(binding.DB, "SELECT id FROM profiles WHERE user_id=? AND deleted_at IS NULL ORDER BY created_at LIMIT 1", session["user_id"])
+    statements = []
+    if profile:
+        profile_id = profile["id"]
+        statements.append(binding.DB.prepare("UPDATE profiles SET display_name=?,updated_at=? WHERE id=?").bind(name,timestamp,profile_id))
+    else:
+        profile_id = f"prof_{uuid.uuid4().hex}"
+        statements.extend([binding.DB.prepare("INSERT INTO profiles(id,display_name,pin_required,save_version,curriculum_version,character_id,user_id,created_at,updated_at) VALUES(?,?,0,1,?,?,?,?,?)").bind(profile_id,name,str(binding.CURRICULUM_VERSION),"runner_01",session["user_id"],timestamp,timestamp),binding.DB.prepare("INSERT INTO progress(profile_id,save_version,curriculum_version,stage_id,unlocked_keys_json,current_lesson_id,resume_json,revision,updated_at) VALUES(?,1,?,'orientation','[\"f\",\"j\",\" \"]','orientation-1','{}',1,?)").bind(profile_id,str(binding.CURRICULUM_VERSION),timestamp)])
+    statements.append(binding.DB.prepare("UPDATE auth_sessions SET profile_id=?,name_confirmed=1,login_name=?,last_seen_at=? WHERE session_hash=?").bind(profile_id,name,timestamp,token_hash(request.cookies.get(COOKIE),required_secret(binding,"SESSION_PEPPER"))))
+    await binding.DB.batch(statements); return {"ok":True,"name":name}
 
 @app.post("/api/v1/auth/admin-login")
 async def admin_login(request: Request):
