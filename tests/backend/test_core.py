@@ -29,3 +29,18 @@ def test_login_page_uses_csp_compatible_external_script():
     source = open('backend/main.py', encoding='utf-8').read()
     assert '<script src="/auth.js" defer></script>' in source
     assert '@app.get("/auth.js")' in source
+
+def test_rev11_login_and_persistence_contracts_are_present():
+    source = open('backend/main.py', encoding='utf-8').read()
+    assert 'About</button> · Produced by Noverel · September 2026' in source
+    assert '"name_required": bool(session and session.get("user_id") and activated and profile is None)' in source
+    assert '@app.get("/api/v1/progress-dashboard")' in source
+    assert '@app.get("/api/v1/weak-key-practice")' in source
+    assert '@app.patch("/api/v1/settings")' in source
+    assert '@app.post("/api/v1/training-sessions")' in source
+
+def test_rev11_migration_is_forward_only_and_preserves_existing_fields():
+    migration = open('migrations/0007_rev11_profile_preferences.sql', encoding='utf-8').read()
+    for field in ('school_status','grade_level','theme_id','sound_enabled','last_training_at'):
+        assert f'ADD COLUMN {field}' in migration
+    assert 'DROP ' not in migration.upper()

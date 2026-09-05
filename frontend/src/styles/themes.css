@@ -1,0 +1,7 @@
+html,body{color:var(--text);background-color:var(--background)}
+body{background:radial-gradient(circle at 50% -20%,var(--accent-soft) 0,transparent 40%),var(--background)}
+button,select{color:var(--text);background:var(--surface-raised);border-color:var(--border)}
+button:hover:not(:disabled),button:focus-visible,select:focus-visible,input:focus-visible{border-color:var(--accent);outline-color:var(--focus-ring)}
+.lesson,.console,.hero-menu,.topbar,.modal>div,.modal>form,.how-grid article{border-color:var(--border)}
+.tooltip-card{position:relative}.tooltip-card .character-help{display:none;position:absolute;left:.5rem;right:.5rem;bottom:calc(100% + .35rem);z-index:3;padding:.65rem;background:var(--surface-raised);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.72rem;text-transform:none;letter-spacing:0}.tooltip-card:hover .character-help,.tooltip-card:focus-visible .character-help{display:block}
+.settings-grid,.progress-grid{display:grid;gap:1rem}.progress-grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.progress-grid article{padding:1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)}.history-list{padding-left:1.2rem}.guide-head{display:flex;justify-content:space-between;align-items:center;gap:1rem}.guide-head button{width:auto;padding:.35rem .55rem;font-size:.72rem}

@@ -13,6 +13,7 @@ from webauthn.helpers.structs import (
     AuthenticatorSelectionCriteria,
     ResidentKeyRequirement,
     UserVerificationRequirement,
+    PublicKeyCredentialDescriptor,
 )
 
 
@@ -20,7 +21,7 @@ def b64url(value: bytes) -> str:
     return base64.urlsafe_b64encode(value).rstrip(b"=").decode("ascii")
 
 
-def registration_options(rp_id: str, handle: str, user_id: bytes, challenge: bytes) -> dict:
+def registration_options(rp_id: str, handle: str, user_id: bytes, challenge: bytes, existing_ids=()) -> dict:
     options = generate_registration_options(
         rp_id=rp_id,
         rp_name="Cadence",
@@ -28,6 +29,7 @@ def registration_options(rp_id: str, handle: str, user_id: bytes, challenge: byt
         user_display_name="Cadence learner",
         user_id=user_id,
         challenge=challenge,
+        exclude_credentials=[PublicKeyCredentialDescriptor(id=base64.urlsafe_b64decode(value + '=' * (-len(value) % 4))) for value in existing_ids],
         attestation=AttestationConveyancePreference.NONE,
         authenticator_selection=AuthenticatorSelectionCriteria(
             resident_key=ResidentKeyRequirement.REQUIRED,

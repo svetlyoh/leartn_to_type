@@ -1,2 +1,17 @@
 .player-heading{display:flex;align-items:center;gap:1rem}.player-heading img{width:72px;height:82px;object-fit:cover;border:1px solid var(--border);border-radius:12px}.player-heading h1{font-size:clamp(2.4rem,8vw,5rem);margin:.1rem 0}.character-picker{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}.character-picker button{display:grid;gap:.35rem;text-align:center}.character-picker img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px}.console-options button small{display:block;margin-top:.35rem;color:var(--muted-text);font-size:.72rem}.ai-input button{margin-top:.35rem}.passage-mode .shell{max-width:1500px;grid-template-columns:minmax(0,1fr) 220px;padding-inline:clamp(1rem,3vw,3rem)}.passage-mode .prompt{font-size:clamp(1.25rem,1rem + .65vw,1.75rem);line-height:1.65;max-height:48vh;overflow-y:auto;overflow-wrap:anywhere;scroll-padding-block:20vh}.passage-mode .prompt span{white-space:pre-wrap}.passage-mode .lesson{padding:clamp(1.2rem,3vw,2.2rem)}
 @media(max-width:800px){.passage-mode .shell{grid-template-columns:1fr}.passage-mode .prompt{font-size:clamp(1.125rem,1rem + .5vw,1.35rem)}.character-picker{grid-template-columns:1fr 1fr}}
+
+/* REV13: prompt characters stay inline while real spaces remain wrap points. */
+body{overflow-x:hidden}
+.shell,.lesson,.console{min-width:0}
+.prompt{width:100%;max-width:100%;height:auto;overflow-x:hidden;padding:clamp(1rem,3vw,1.5rem)}
+.prompt-text{display:block;width:min(100%,70ch);max-width:100%;margin-inline:auto;white-space:pre-wrap;overflow-wrap:break-word;word-break:normal}
+.prompt-text>span{display:inline}
+.prompt-text>.space{position:relative;color:transparent}
+.prompt-text>.space::after{content:"·";position:absolute;inset-inline-start:0;color:#607080}
+.prompt-text>.space.done::after{color:#9ba9b6}
+.prompt[data-layout="short"]{font-size:clamp(2rem,1.5rem + 1.5vw,3rem);line-height:1.35;text-align:center}
+.prompt[data-layout="standard"]{font-size:clamp(1.65rem,1.25rem + 1vw,2.35rem);line-height:1.55;text-align:left}
+.prompt[data-layout="passage"]{font-size:clamp(1.25rem,1rem + .65vw,1.75rem);line-height:1.65;text-align:left;max-height:48vh;overflow-y:auto;scroll-padding-block:20vh}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:800px){.shell{min-width:0}.prompt[data-layout="short"],.prompt[data-layout="standard"]{font-size:clamp(1.25rem,1rem + 1.5vw,1.65rem);line-height:1.6}}
